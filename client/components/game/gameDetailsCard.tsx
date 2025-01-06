@@ -3,6 +3,7 @@ import { formatEther } from "ethers/lib/utils";
 import SlideOvers from "../ui/slideOvers";
 import TotalParticipatesBar from "./components/totalParticipatesBar";
 import NumberCard from "./numberCard";
+import Image from "next/image";
 
 interface Props {
   name: string;
@@ -55,7 +56,7 @@ const GameDetailsCard = ({
               {Number(formatEther(String(data?.EntryFee || 0))).toLocaleString(
                 "en-US"
               )}
-              <img
+              <Image
                 className="w-[16px] h-[16px] ml-1 inline-flex"
                 src="/Dai.png"
                 alt="Dai"
@@ -64,7 +65,7 @@ const GameDetailsCard = ({
             <div className="mt-1">
               Total Prize Amount {""}
               {tAmount}
-              <img
+              <Image
                 className="w-[16px] h-[16px] ml-1 inline-flex"
                 src="/Dai.png"
                 alt="Dai"

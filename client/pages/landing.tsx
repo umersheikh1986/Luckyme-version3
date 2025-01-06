@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Dialog } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
+import Image from "next/image";
 
 const navigation = [
   { name: "Product", href: "#" },
@@ -46,7 +47,7 @@ const Landing: NextPage = () => {
           <div className="flex lg:flex-1">
             <Link href="/" className="-m-1.5 p-1.5">
               <span className="sr-only">Your Company</span>
-              <img
+              <Image
                 className="h-8"
                 src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
                 alt=""
@@ -75,7 +76,10 @@ const Landing: NextPage = () => {
             ))}
           </div>
           <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-            <Link href="/dashboard" className="text-sm font-semibold leading-6 text-gray-900">
+            <Link
+              href="/dashboard"
+              className="text-sm font-semibold leading-6 text-gray-900"
+            >
               Dashboard <span aria-hidden="true">&rarr;</span>
             </Link>
           </div>
@@ -85,7 +89,7 @@ const Landing: NextPage = () => {
             <div className="flex items-center justify-between">
               <a href="#" className="-m-1.5 p-1.5">
                 <span className="sr-only">Your Company</span>
-                <img
+                <Image
                   className="h-8"
                   src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
                   alt=""
@@ -145,8 +149,8 @@ const Landing: NextPage = () => {
             for small businesses.
           </h1>
           <p className="mx-auto mt-6 max-w-2xl text-lg tracking-tight text-slate-700">
-            Most bookkeeping software is accurate, but hard to use. We make the opposite trade-off,
-            and hope you don’t get audited.
+            Most bookkeeping software is accurate, but hard to use. We make the
+            opposite trade-off, and hope you don’t get audited.
           </p>
           <div className="mt-10 flex justify-center gap-x-6">
             <Link
@@ -159,7 +163,11 @@ const Landing: NextPage = () => {
         </div>
       </main>
 
-      <section id="pricing" aria-label="Pricing" className="bg-slate-900 py-20 sm:py-32">
+      <section
+        id="pricing"
+        aria-label="Pricing"
+        className="bg-slate-900 py-20 sm:py-32"
+      >
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="md:text-center">
             <h2 className="font-display text-3xl tracking-tight text-white sm:text-4xl">
@@ -181,7 +189,8 @@ const Landing: NextPage = () => {
               for everyone.
             </h2>
             <p className="mt-4 text-lg text-slate-400">
-              It doesn’t matter what size your business is, our software won’t work well for you.
+              It doesn’t matter what size your business is, our software won’t
+              work well for you.
             </p>
           </div>
           <div className="mx-4 mt-16 grid max-w-2xl grid-cols-1 gap-y-10 sm:mx-auto lg:mx-auto lg:max-w-4xl lg:grid-cols-2 xl:mx-auto xl:gap-x-8">
@@ -244,7 +253,11 @@ const Landing: NextPage = () => {
                     aria-hidden="true"
                     className="h-6 w-6 flex-none fill-current stroke-current text-slate-400/50"
                   >
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M6 18L18 6M6 6l12 12"
+                    />
 
                     <circle
                       cx="12"
@@ -256,14 +269,20 @@ const Landing: NextPage = () => {
                       strokeLinejoin="round"
                     ></circle>
                   </svg>
-                  <span className="ml-4 text-slate-400/50">Will get Picks rewards</span>
+                  <span className="ml-4 text-slate-400/50">
+                    Will get Picks rewards
+                  </span>
                 </li>
                 <li className="flex">
                   <svg
                     aria-hidden="true"
                     className="h-6 w-6 flex-none fill-current stroke-current text-slate-400/50"
                   >
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M6 18L18 6M6 6l12 12"
+                    />
 
                     <circle
                       cx="12"
@@ -275,7 +294,9 @@ const Landing: NextPage = () => {
                       strokeLinejoin="round"
                     ></circle>
                   </svg>
-                  <span className="ml-4 text-slate-400/50">Will get prizes rewards</span>
+                  <span className="ml-4 text-slate-400/50">
+                    Will get prizes rewards
+                  </span>
                 </li>
               </ul>
               <Link
@@ -294,7 +315,10 @@ const Landing: NextPage = () => {
               <p className="order-first font-display text-5xl font-light tracking-tight text-white">
                 $10
               </p>
-              <ul role="list" className="order-last mt-10 flex flex-col gap-y-3 text-sm text-white">
+              <ul
+                role="list"
+                className="order-last mt-10 flex flex-col gap-y-3 text-sm text-white"
+              >
                 <li className="flex">
                   <svg
                     aria-hidden="true"

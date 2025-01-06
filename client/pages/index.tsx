@@ -1,4 +1,5 @@
 import type { NextPage } from "next";
+import Image from "next/image";
 import { useState, Fragment } from "react";
 import { Dialog, Disclosure, Menu, Transition } from "@headlessui/react";
 import {
@@ -28,7 +29,7 @@ const Home: NextPage = () => {
           <div className="flex lg:flex-1">
             <Link href="/">
               <span className="sr-only">Your Company</span>
-              <img width={80} src="/Lucky-Me.png" alt="Your Company" />
+              <Image width={80} src="/Lucky-Me.png" alt="Your Company" />
             </Link>
           </div>
           <div className="flex lg:hidden">
@@ -121,7 +122,7 @@ const Home: NextPage = () => {
               <div className="-m-1.5 p-1.5">
                 <Link href="/">
                   <span className="sr-only">Your Company</span>
-                  <img width={50} src="/Lucky-Me.png" alt="Your Company" />
+                  <Image width={50} src="/Lucky-Me.png" alt="Your Company" />
                 </Link>
               </div>
               <button
@@ -196,7 +197,7 @@ const Home: NextPage = () => {
       <section className="flex items-center lg:h-screen h-[60vh]">
         <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
           <div className="max-w-xl mx-auto text-center ">
-            <img
+            <Image
               src="/Lucky-Me.png"
               alt=""
               className="mx-auto w-[30%] lg:pb-5"
@@ -215,7 +216,7 @@ const Home: NextPage = () => {
         <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
           <div className="grid items-center grid-cols-1 gap-12 lg:grid-cols-2">
             <div className="flex justify-center items-end h-full">
-              <img width={400} src="assets/Picture1.png" alt="" />
+              <Image width={400} src="assets/Picture1.png" alt="" />
             </div>
             <div>
               <h1 className="text-4xl font-bold  text-white sm:text-6xl lg:text-4xl">
@@ -245,13 +246,13 @@ const Home: NextPage = () => {
         <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
           <div className="grid items-center grid-cols-1 gap-12 lg:grid-cols-2">
             <div className="">
-              <img
+              <Image
                 width={300}
                 className="mx-auto"
                 src="assets/Picture2-1.png"
                 alt=""
               />
-              <img
+              <Image
                 width={300}
                 className="mt-12 mx-auto"
                 src="assets/Picture2-2.png"
@@ -292,7 +293,7 @@ const Home: NextPage = () => {
         <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
           <div className="grid items-center grid-cols-1 gap-12 lg:grid-cols-2">
             <div className="text-center">
-              <img
+              <Image
                 src="/Lucky-Me.png"
                 alt=""
                 className="mx-auto w-[18%] lg:pb-5"
@@ -308,7 +309,7 @@ const Home: NextPage = () => {
               <div className="mt-10 sm:flex sm:items-center sm:space-x-8"></div>
             </div>
             <div className="flex justify-center">
-              <img src="assets/Picture3.png" alt="" />
+              <Image src="assets/Picture3.png" alt="" />
             </div>
           </div>
         </div>
@@ -329,7 +330,7 @@ const Home: NextPage = () => {
             Percentage
           </h1>
           <div className="flex justify-center">
-            <img width={400} src="assets/Pie-chart1.png" alt="" />
+            <Image width={400} src="assets/Pie-chart1.png" alt="" />
           </div>
           <div className="flex justify-center gap-3">
             <div className="w-3 h-3 border border-white bg-[#E62E2D] mt-1 flex-shrink-0"></div>
@@ -353,7 +354,7 @@ const Home: NextPage = () => {
           <div className="grid grid-cols-1 lg:grid-cols-6 md:grid-cols-4 sm:grid-cols-1 gap-4 text-white mt-6">
             <div className="col-span-2 border-r-2 text-center px-14">
               <div className="mb-5">
-                <img
+                <Image
                   width={200}
                   className="mx-auto"
                   src="assets/picture5-1.png"
@@ -481,7 +482,7 @@ const Home: NextPage = () => {
 
             <div className="col-span-2 border-r-2 text-center px-14">
               <div className="mb-5">
-                <img
+                <Image
                   width={140}
                   className="mx-auto"
                   src="assets/picture5-2.png"
@@ -511,7 +512,7 @@ const Home: NextPage = () => {
 
             <div className="col-span-2 border-r-2 text-center px-14">
               <div className="mb-5">
-                <img
+                <Image
                   width={140}
                   className="mx-auto"
                   src="assets/picture5-3.png"
@@ -560,7 +561,7 @@ const Home: NextPage = () => {
               </ul>
             </div>
             <div className="w-full lg:w-auto xl:w-auto mt-8">
-              <img width={600} className="mt-6 sm:mx-auto" src="assets/Picture5.png" alt="" />
+              <Image width={600} className="mt-6 sm:mx-auto" src="assets/Picture5.png" alt="" />
             </div>
             <ul className="list-disc text-white hidden lg:block xl:block">
               <span className="text-white">Referral System Of 5 Levels:</span>
@@ -588,7 +589,7 @@ const Home: NextPage = () => {
                 </h5>
               </span>
               <span className="w-full mx-auto">
-                <img
+                <Image
                   width={20}
                   className="mx-auto"
                   src="assets/dai.png"
@@ -604,7 +605,7 @@ const Home: NextPage = () => {
                 </h5>
               </span>
               <span className="w-full mx-auto">
-                <img
+                <Image
                   width={20}
                   className="mx-auto"
                   src="assets/dai.png"
@@ -620,7 +621,7 @@ const Home: NextPage = () => {
                 </h5>
               </span>
               <span className="w-full mx-auto">
-                <img
+                <Image
                   width={20}
                   className="mx-auto"
                   src="assets/dai.png"
@@ -636,7 +637,7 @@ const Home: NextPage = () => {
                 </h5>
               </span>
               <span className="w-full mx-auto">
-                <img
+                <Image
                   width={20}
                   className="mx-auto"
                   src="assets/dai.png"
@@ -652,7 +653,7 @@ const Home: NextPage = () => {
                 </h5>
               </span>
               <span className="w-full mx-auto">
-                <img
+                <Image
                   width={20}
                   className="mx-auto"
                   src="assets/dai.png"
@@ -668,7 +669,7 @@ const Home: NextPage = () => {
                 </h5>
               </span>
               <span className="w-full mx-auto">
-                <img
+                <Image
                   width={20}
                   className="mx-auto"
                   src="assets/dai.png"
@@ -684,7 +685,7 @@ const Home: NextPage = () => {
                 </h5>
               </span>
               <span className="w-full mx-auto">
-                <img
+                <Image
                   width={20}
                   className="mx-auto"
                   src="assets/dai.png"
@@ -700,7 +701,7 @@ const Home: NextPage = () => {
                 </h5>
               </span>
               <span className="w-full mx-auto">
-                <img
+                <Image
                   width={20}
                   className="mx-auto"
                   src="assets/dai.png"
@@ -716,7 +717,7 @@ const Home: NextPage = () => {
                 </h5>
               </span>
               <span className="w-full mx-auto">
-                <img
+                <Image
                   width={20}
                   className="mx-auto"
                   src="assets/dai.png"
@@ -727,7 +728,7 @@ const Home: NextPage = () => {
           </div>
           <div className="max-w-xl mx-auto text-center pt-6">
             <h2 className="lg:text-2xl md:text-xl text-lg text-center font-bold leading-tight text-white">
-              THERE'S AN OPPORTUNITY FOR EVERYONE
+              THERE S AN OPPORTUNITY FOR EVERYONE
             </h2>
           </div>
         </div>
@@ -924,7 +925,7 @@ const Home: NextPage = () => {
             <span className="text-white">Oceania</span>
           </div>
           <div className="flex justify-center">
-            <img width={400} src="assets/Pie-chart2.png" alt="" />
+            <Image width={400} src="assets/Pie-chart2.png" alt="" />
           </div>
           <h2 className="lg:text-3xl font-semibold text-center text-white sm:text-xl md:text-xl mt-10">
             GET YOUR SHARE OF THE MARKET
@@ -1272,7 +1273,7 @@ const Home: NextPage = () => {
         <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
           <div className="grid items-center grid-cols-1 gap-12 lg:grid-cols-2">
             <div className="text-center">
-              <img
+              <Image
                 src="/Lucky-Me.png"
                 alt=""
                 className="mx-auto w-[18%] lg:pb-5"
@@ -1288,7 +1289,7 @@ const Home: NextPage = () => {
               <div className="mt-10 sm:flex sm:items-center sm:space-x-8"></div>
             </div>
             <div className="flex justify-center">
-              <img src="assets/Picture3.png" alt="" />
+              <Image src="assets/Picture3.png" alt="" />
             </div>
           </div>
         </div>

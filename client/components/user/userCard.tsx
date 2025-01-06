@@ -6,6 +6,7 @@ import { LuckyMeAddress } from "../../lib/contract";
 import Renew from "./renew";
 import Upgrade from "./upgrade";
 import CopyToClipboardButton from "../ui/copyToClipboardButton";
+import Image from "next/image";
 
 const UserCard = ({ userId, mode }: { userId: any; mode?: string }) => {
   const address = useAddress();
@@ -173,7 +174,7 @@ const UserCard = ({ userId, mode }: { userId: any; mode?: string }) => {
           {Number(formatEther(String(totalEarning || 0))).toLocaleString(
             "en-US"
           )}
-          <img
+          <Image
             className="w-[16px]  ml-1 inline-block"
             src="/Dai.png"
             alt="Dai"
@@ -199,7 +200,11 @@ const UserCard = ({ userId, mode }: { userId: any; mode?: string }) => {
         <div className="flex justify-between font-medium text-white">
           <span className="mr-2 text-lg">Prizes Won</span>
           <span className="flex">
-            <img className="w-[20px] h-[20px] mr-1" src="/Dai.png" alt="Dai" />
+            <Image
+              className="w-[20px] h-[20px] mr-1"
+              src="/Dai.png"
+              alt="Dai"
+            />
             <p className="text-lg">
               {Number(
                 formatEther(String(data?.TotalPrizesAmount || 0))
@@ -211,7 +216,11 @@ const UserCard = ({ userId, mode }: { userId: any; mode?: string }) => {
         <div className="flex mt-2 justify-between font-medium text-white">
           <span className="mr-2 text-lg">Games Picks Rewards</span>
           <span className="flex">
-            <img className="w-[20px] h-[20px] mr-1" src="/Dai.png" alt="Dai" />
+            <Image
+              className="w-[20px] h-[20px] mr-1"
+              src="/Dai.png"
+              alt="Dai"
+            />
             <p className="text-lg">
               {Number(
                 formatEther(String(data?.TotalPicksRewards || 0))
@@ -223,7 +232,11 @@ const UserCard = ({ userId, mode }: { userId: any; mode?: string }) => {
         <div className="flex mt-2 justify-between font-medium text-white">
           <span className="mr-2 text-lg">Prizes Rewards</span>
           <span className="flex">
-            <img className="w-[20px] h-[20px] mr-1" src="/Dai.png" alt="Dai" />
+            <Image
+              className="w-[20px] h-[20px] mr-1"
+              src="/Dai.png"
+              alt="Dai"
+            />
             <p className="text-lg">
               {Number(
                 formatEther(String(data?.TotalPrizesRewards || 0))
@@ -235,7 +248,11 @@ const UserCard = ({ userId, mode }: { userId: any; mode?: string }) => {
         <div className="flex mt-2 justify-between font-medium text-white">
           <span className="mr-2 text-lg">Membership Rewards</span>
           <span className="flex">
-            <img className="w-[20px] h-[20px] mr-1" src="/Dai.png" alt="Dai" />
+            <Image
+              className="w-[20px] h-[20px] mr-1"
+              src="/Dai.png"
+              alt="Dai"
+            />
             <p className="text-lg">
               {Number(
                 formatEther(String(data?.TotalReferralRewards || 0))

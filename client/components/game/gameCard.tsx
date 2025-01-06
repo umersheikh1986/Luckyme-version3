@@ -5,6 +5,7 @@ import { classNames } from "../../lib/classNames";
 import { LuckyMeAddress } from "../../lib/contract";
 import TotalParticipatesBar from "./components/totalParticipatesBar";
 import GameDetailsCard from "./gameDetailsCard";
+import Image from "next/image";
 
 const GameCard = ({
   name,
@@ -109,7 +110,7 @@ const GameCard = ({
         {Number(formatEther(String(data?.EntryFee || 0))).toLocaleString(
           "en-US"
         )}
-        <img
+        <Image
           className="w-[16px] h-[16px] ml-1 inline-flex"
           src="/Dai.png"
           alt="Dai"

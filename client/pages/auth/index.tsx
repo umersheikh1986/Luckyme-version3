@@ -1,3 +1,4 @@
+import Image from "next/image";
 import {
   ConnectWallet,
   useAddress,
@@ -42,7 +43,7 @@ const Auth = () => {
         {/* register div */}
         <div className="max-w-md w-full m-auto rounded-2xl px-4 py-8 sm:p-6 sm:pb-4 bg-[#660e22] border-2 border-white/40">
           <div className="w-full flex justify-center">
-            <img width={100} src="/Lucky-Me.png" alt="" />
+            <Image width={100} src="/Lucky-Me.png" alt="" />
           </div>
           <p className="p-2 text-white">The Entrance To The Office</p>
           <div className="sm:flex sm:items-start"></div>
