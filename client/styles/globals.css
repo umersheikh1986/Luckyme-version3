@@ -1,0 +1,46 @@
+@import url('https://fonts.googleapis.com/css2?family=Bakbak+One&display=swap');
+@tailwind base;
+
+
+:root{
+  /* --secondary:#660e22;
+  --primary:#360712; */
+  
+  --secondary:#360712;
+  --primary:#660e22;
+}
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--secondary) var(--primary);
+}
+
+/* Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+  width: 12px;
+}
+
+*::-webkit-scrollbar-track {
+  background: var(--primary);
+  border-radius: 5px;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: var(--secondary);
+  border-radius: 10px;
+  border: 3px solid var(--primary);
+}
+
+
+@tailwind components;
+@tailwind utilities;
+
+* {
+  font-family: 'Bakbak One', cursive;
+  /* background-image: url('../public/assets/backgroundImage.png'); */
+  
+}
+
+body{
+  background-color: #540013;
+}
