@@ -9,6 +9,7 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 import { classNames } from "../../lib/classNames";
 import { DaiAbi, DaiAddress, LuckyMeAddress } from "../../lib/contract";
+import Image from "next/image";
 
 const UserRegister = ({ id, href }: { id?: any; href?: string }) => {
   const router = useRouter();
@@ -177,7 +178,7 @@ const UserRegister = ({ id, href }: { id?: any; href?: string }) => {
         <div className="flex justify-between text-[18px] text-white">
           <span>Your Balance</span>
           <span className="flex">
-            <img className="w-[20px] mr-1" src="/Dai.png" alt="Dai" />
+            <Image className="w-[20px] mr-1" src="/Dai.png" alt="Dai" />
             <p>{formatEther(String(balance || 0))}</p>
           </span>
         </div>
@@ -192,7 +193,7 @@ const UserRegister = ({ id, href }: { id?: any; href?: string }) => {
         <div className="flex justify-between text-[18px] text-white">
           <span>Your Allowance</span>
           <span className="flex">
-            <img className="w-[20px] mr-1" src="/Dai.png" alt="Dai" />
+            <Image className="w-[20px] mr-1" src="/Dai.png" alt="Dai" />
             <p>{formatEther(String(allowance || 0))}</p>
           </span>
         </div>
