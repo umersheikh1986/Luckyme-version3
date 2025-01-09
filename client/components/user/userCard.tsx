@@ -322,7 +322,7 @@ const UserCard = ({ userId, mode }: { userId: any; mode?: string }) => {
             <CopyToClipboardButton text={String(LuckyMeAddress)} />
 
             <a
-              href={`https://polygonscan.com/address/${LuckyMeAddress}`}
+              href={`https://holesky.etherscan.io//address/${LuckyMeAddress}`}
               target="_blank"
             >
               <svg
@@ -351,7 +351,7 @@ const UserCard = ({ userId, mode }: { userId: any; mode?: string }) => {
             <CopyToClipboardButton text={String(data?.Address)} />
 
             <a
-              href={`https://polygonscan.com/address/${data?.Address}`}
+              href={`https://holesky.etherscan.io/address/${data?.Address}`}
               target="_blank"
             >
               <svg
