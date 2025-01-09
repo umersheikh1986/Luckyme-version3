@@ -334,7 +334,7 @@ export default function Header({
       {address !== undefined && data?.chain?.name !== "Holesky Testnet" && (
         <div className="relative isolate overflow-hidden bg-gray-50 py-2.5 px-6 sm:px-3.5">
           <div className="font-medium text-red-600 text-center">
-            Please switch your network to Polygon Mainnet Chain
+            Please switch your network to Holesky Testnet
           </div>
         </div>
       )}
