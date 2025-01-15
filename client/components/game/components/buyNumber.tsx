@@ -45,6 +45,7 @@ export default function BuyNumber({
     LuckyMeAddress
   );
 
+  console.log("this is allownace method",balance);
   // Write functions
   const { mutateAsync: approve, isLoading: approveIsLoading } =
     useContractWrite(daiContract, "approve");

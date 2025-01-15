@@ -8,17 +8,17 @@ import { formatEther, parseEther } from "ethers/lib/utils";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { classNames } from "../../lib/classNames";
-import { DaiAbi, DaiAddress, LuckyMeAddress } from "../../lib/contract";
+import { DaiAbi, DaiAddress, LuckyMeAddress,LuckyMeAbi } from "../../lib/contract";
 import Image from "next/image";
 
 const UserRegister = ({ id, href }: { id?: any; href?: string }) => {
   const router = useRouter();
   const address = useAddress();
-  const [selectedOption, setSelectedOption] = useState("10.0");
+  const [selectedOption, setSelectedOption] = useState('1.0');
 
   //    contracts
   const { contract: daiContract } = useContract(DaiAddress, DaiAbi);
-  const { contract: LuckyMeContract } = useContract(LuckyMeAddress);
+  const { contract: LuckyMeContract } = useContract(LuckyMeAddress ,LuckyMeAbi);
 
   //    Read functions
   const { data: balance, isLoading: balanceIsLoading } = useContractRead(
@@ -49,16 +49,18 @@ const UserRegister = ({ id, href }: { id?: any; href?: string }) => {
     useContractWrite(LuckyMeContract, "register");
   const callRegister = async () => {
     try {
-      const data = await register([
-        id !== undefined ? id : 1,
-        selectedOption === "1.0" ? 0 : 1,
+      console.log(id,selectedOption,address);
+      
+      const data1 = await register([
+       id,
+       selectedOption,
         address,
       ]);
-      console.info("contract call success", data);
-      if (href !== undefined) router.push(href);
-    } catch (err) {
-      console.error("contract call failure", err);
+      console.log("Registration successful:", data1);
+    } catch (error) {
+      console.error("Registration failed:", error);
     }
+    
   };
 
   return (
@@ -178,7 +180,8 @@ const UserRegister = ({ id, href }: { id?: any; href?: string }) => {
         <div className="flex justify-between text-[18px] text-white">
           <span>Your Balance</span>
           <span className="flex">
-            <Image className="w-[20px] mr-1" src="/Dai.png" alt="Dai" />
+            <Image className="w-[20px] mr-1"  width={500}
+      height={500} src="/Dai.png" alt="Dai" />
             <p>{formatEther(String(balance || 0))}</p>
           </span>
         </div>
@@ -193,7 +196,8 @@ const UserRegister = ({ id, href }: { id?: any; href?: string }) => {
         <div className="flex justify-between text-[18px] text-white">
           <span>Your Allowance</span>
           <span className="flex">
-            <Image className="w-[20px] mr-1" src="/Dai.png" alt="Dai" />
+            <Image className="w-[20px] mr-1"  width={500}
+      height={500} src="/Dai.png" alt="Dai" />
             <p>{formatEther(String(allowance || 0))}</p>
           </span>
         </div>

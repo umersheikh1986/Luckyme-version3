@@ -1,6 +1,6 @@
+import { useState } from "react";
 import { useAddress, useContract, useContractRead } from "@thirdweb-dev/react";
 import { formatEther } from "ethers/lib/utils";
-import { useState } from "react";
 import { classNames } from "../../lib/classNames";
 import { LuckyMeAddress } from "../../lib/contract";
 import TotalParticipatesBar from "./components/totalParticipatesBar";
@@ -112,6 +112,8 @@ const GameCard = ({
         )}
         <Image
           className="w-[16px] h-[16px] ml-1 inline-flex"
+          width={500}
+          height={500}
           src="/Dai.png"
           alt="Dai"
         />

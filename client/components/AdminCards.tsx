@@ -1,12 +1,14 @@
 import { useContract, useContractRead } from "@thirdweb-dev/react";
-import { LuckyMeAddress } from "../lib/contract";
+import { LuckyMeAddress ,LuckyMeAbi} from "../lib/contract";
 import { formatEther } from "ethers/lib/utils";
 
 const AdminCards = () => {
-  const { contract } = useContract(LuckyMeAddress);
+  const { contract, error: contractError } = useContract(LuckyMeAddress, LuckyMeAbi);
+  
+
   const { data: Members, isLoading: MembersIsLoading } = useContractRead(
     contract,
-    "Members"
+    "Members",
   );
   const { data: Partners, isLoading: PartnersIsLoading } = useContractRead(
     contract,
@@ -14,11 +16,15 @@ const AdminCards = () => {
   );
   const { data: TotalRewardsPaid, isLoading: TotalRewardsPaidIsLoading } =
     useContractRead(contract, "TotalRewardsPaid");
-
+    console.log(String(TotalRewardsPaid), "TotalRewardsPaid");
   const { data: TotalPicksAmount, isLoading: TotalPicksAmountIsLoading } =
     useContractRead(contract, "TotalPicksAmount");
   console.log(String(TotalPicksAmount), "TotalPicksAmount>>");
-  //
+  
+  if (contractError) {
+    // console.error("Contract initialization error:", contractError);
+    return <div>Error initializing contract</div>;
+  }
 
   return (
     <div className="col-span-3 grid grid-cols-2 gap-4 px-2 sm:grid-cols-4 sm:gap-8 sm:px-0">
