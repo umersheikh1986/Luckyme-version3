@@ -366,14 +366,14 @@ const Home: NextPage = () => {
           <div className="grid grid-cols-1 lg:grid-cols-6 md:grid-cols-4 sm:grid-cols-1 gap-4 text-white mt-6">
             <div className="col-span-2 border-r-2 text-center px-14">
               <div className="mb-5">
-                <Image
+                {/* <Image
                   width={200}
                   
                   height={200}
                   className="mx-auto"
                   src="/assets/picture5-1.png"
-                  alt=""
-                />
+                  alt="sss"
+                /> */}
               </div>
               <div className="flex items-center p-1 my-2 border border-white rounded-[25px] shadow hover:bg-gray-100 bg-gradient-to-r from-[#FF8B00] to-[#D41630]">
                 <span className=" w-1/4">
@@ -496,14 +496,14 @@ const Home: NextPage = () => {
 
             <div className="col-span-2 border-r-2 text-center px-14">
               <div className="mb-5">
-                <Image
+                {/* <Image
                   width={140}
                   
                   height={140}
                   className="mx-auto"
                   src="/assets/picture5-2.png"
                   alt=""
-                />
+                /> */}
               </div>
               <div className="flex items-center p-1 my-2 border border-white rounded-[25px] shadow hover:bg-gray-100 bg-gradient-to-r from-[#FF8B00] to-[#D41630]">
                 <span className="w-full py-[14px]">
@@ -528,13 +528,13 @@ const Home: NextPage = () => {
 
             <div className="col-span-2 border-r-2 text-center px-14">
               <div className="mb-5">
-                <Image
+                {/* <Image
                   width={140}
                   height={140}
                   className="mx-auto"
                   src="/assets/picture5-3.png"
                   alt=""
-                />
+                /> */}
               </div>
               <div className="flex items-center p-1 my-2 border border-white rounded-[25px] shadow hover:bg-gray-100 bg-gradient-to-r from-[#FF8B00] to-[#D41630]">
                 <span className="w-full">
