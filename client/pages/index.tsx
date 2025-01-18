@@ -610,7 +610,7 @@ const Home: NextPage = () => {
                   width={20}
                   height={20}
                   className="mx-auto"
-                  src="/dai.png"
+                  src="/assets/dai.png"
                   alt=""
                 />
               </span>
@@ -627,7 +627,7 @@ const Home: NextPage = () => {
                   width={20} 
                   height={20}
                   className="mx-auto"
-                  src="/dai.png"
+                  src="/assets/dai.png"
                   alt=""
                 />
               </span>
@@ -644,7 +644,7 @@ const Home: NextPage = () => {
                   width={20}
                   height={20}
                   className="mx-auto"
-                  src="/dai.png"
+                  src="/assets/dai.png"
                   alt=""
                 />
               </span>
@@ -661,7 +661,7 @@ const Home: NextPage = () => {
                   width={20}
                   height={20}
                   className="mx-auto"
-                  src="/dai.png"
+                  src="/assets/dai.png"
                   alt=""
                 />
               </span>
@@ -678,7 +678,7 @@ const Home: NextPage = () => {
                   width={20}
                   height={20}
                   className="mx-auto"
-                  src="/dai.png"
+                  src="/assets/dai.png"
                   alt=""
                 />
               </span>
@@ -695,7 +695,7 @@ const Home: NextPage = () => {
                   width={20}
                   height={20}
                   className="mx-auto"
-                  src="/dai.png"
+                  src="/assets/dai.png"
                   alt=""
                 />
               </span>
@@ -712,7 +712,7 @@ const Home: NextPage = () => {
                   width={20}
                   height={20}
                   className="mx-auto"
-                  src="/dai.png"
+                  src="/assets/dai.png"
                   alt=""
                 />
               </span>
@@ -729,7 +729,7 @@ const Home: NextPage = () => {
                   width={20}
                   height={20}
                   className="mx-auto"
-                  src="/dai.png"
+                  src="/assets/dai.png"
                   alt=""
                 />
               </span>
@@ -746,7 +746,7 @@ const Home: NextPage = () => {
                   width={20}
                   height={20}
                   className="mx-auto"
-                  src="/dai.png"
+                  src="/assets/dai.png"
                   alt=""
                 />
               </span>
