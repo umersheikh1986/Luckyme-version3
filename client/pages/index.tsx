@@ -250,18 +250,18 @@ const Home: NextPage = () => {
           <div className="grid items-center grid-cols-1 gap-12 lg:grid-cols-2">
             <div className="">
               <Image
-                width={300}
-                height={300}
+                width={220}
+                height={220}
                 className="mx-auto"
-                src="/assets/Picture2-1.png"
+                src="/assets/gLogo.png"
                 alt=""
               />
               <Image
-                width={300}
+                width={450}
                 
                 height={300}
                 className="mt-12 mx-auto"
-                src="/assets/Picture2-2.png"
+                src="/assets/Binance.png"
                 alt=""
               />
             </div>
@@ -607,10 +607,10 @@ const Home: NextPage = () => {
               </span>
               <span className="w-full mx-auto">
                 <Image
-                  width={20}
-                  height={20}
+                  width={40}
+                  height={40}
                   className="mx-auto"
-                  src="/assets/dai.png"
+                  src="/assets/gLogo.png"
                   alt=""
                 />
               </span>
@@ -624,10 +624,10 @@ const Home: NextPage = () => {
               </span>
               <span className="w-full mx-auto">
                 <Image
-                  width={20} 
-                  height={20}
+                  width={40} 
+                  height={40}
                   className="mx-auto"
-                  src="/assets/dai.png"
+                  src="/assets/gLogo.png"
                   alt=""
                 />
               </span>
@@ -641,10 +641,10 @@ const Home: NextPage = () => {
               </span>
               <span className="w-full mx-auto">
                 <Image
-                  width={20}
-                  height={20}
+                  width={40}
+                  height={40}
                   className="mx-auto"
-                  src="/assets/dai.png"
+                  src="/assets/gLogo.png"
                   alt=""
                 />
               </span>
@@ -658,10 +658,10 @@ const Home: NextPage = () => {
               </span>
               <span className="w-full mx-auto">
                 <Image
-                  width={20}
-                  height={20}
+                  width={40}
+                  height={40}
                   className="mx-auto"
-                  src="/assets/dai.png"
+                  src="/assets/gLogo.png"
                   alt=""
                 />
               </span>
@@ -675,10 +675,10 @@ const Home: NextPage = () => {
               </span>
               <span className="w-full mx-auto">
                 <Image
-                  width={20}
-                  height={20}
+                  width={40}
+                  height={40}
                   className="mx-auto"
-                  src="/assets/dai.png"
+                  src="/assets/gLogo.png"
                   alt=""
                 />
               </span>
@@ -692,10 +692,10 @@ const Home: NextPage = () => {
               </span>
               <span className="w-full mx-auto">
                 <Image
-                  width={20}
-                  height={20}
+                  width={40}
+                  height={40}
                   className="mx-auto"
-                  src="/assets/dai.png"
+                  src="/assets/gLogo.png"
                   alt=""
                 />
               </span>
@@ -709,10 +709,10 @@ const Home: NextPage = () => {
               </span>
               <span className="w-full mx-auto">
                 <Image
-                  width={20}
-                  height={20}
+                  width={40}
+                  height={40}
                   className="mx-auto"
-                  src="/assets/dai.png"
+                  src="/assets/gLogo.png"
                   alt=""
                 />
               </span>
@@ -726,10 +726,10 @@ const Home: NextPage = () => {
               </span>
               <span className="w-full mx-auto">
                 <Image
-                  width={20}
-                  height={20}
+                  width={40}
+                  height={40}
                   className="mx-auto"
-                  src="/assets/dai.png"
+                  src="/assets/gLogo.png"
                   alt=""
                 />
               </span>
@@ -743,10 +743,10 @@ const Home: NextPage = () => {
               </span>
               <span className="w-full mx-auto">
                 <Image
-                  width={20}
-                  height={20}
+                  width={40}
+                  height={40}
                   className="mx-auto"
-                  src="/assets/dai.png"
+                  src="/assets/gLogo.png"
                   alt=""
                 />
               </span>
