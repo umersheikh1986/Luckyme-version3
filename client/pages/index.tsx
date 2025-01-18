@@ -219,7 +219,7 @@ const Home: NextPage = () => {
           <div className="grid items-center grid-cols-1 gap-12 lg:grid-cols-2">
             <div className="flex justify-center items-end h-full">
               <Image width={400}  
-      height={400} src={`/Picture1.png`} alt="" />
+      height={400} src="/assets/Picture1.png" alt="this is 3rd section" />
             </div>
             <div>
               <h1 className="text-4xl font-bold  text-white sm:text-6xl lg:text-4xl">
@@ -253,7 +253,7 @@ const Home: NextPage = () => {
                 width={300}
                 height={300}
                 className="mx-auto"
-                src="/Picture2-1.png"
+                src="/assets/Picture2-1.png"
                 alt=""
               />
               <Image
@@ -261,7 +261,7 @@ const Home: NextPage = () => {
                 
                 height={300}
                 className="mt-12 mx-auto"
-                src="/Picture2-2.png"
+                src="/assets/Picture2-2.png"
                 alt=""
               />
             </div>
@@ -300,10 +300,10 @@ const Home: NextPage = () => {
           <div className="grid items-center grid-cols-1 gap-12 lg:grid-cols-2">
             <div className="text-center">
               <Image
-                src="/Lucky-Me.png"
+                src={"/Lucky-Me.png"}
                 width={500}
                 height={500}
-                alt=""
+                alt="lucky me"
                 className="mx-auto w-[18%] lg:pb-5"
               />
               <h2 className="lg:text-6xl md:text-5xl text-3xl text-center font-bold leading-tight text-white">
@@ -320,7 +320,7 @@ const Home: NextPage = () => {
               <Image 
                width={500}
                height={500} 
-               src={`/Picture3.png`} alt="" />
+               src={`/assets/Picture3.png`} alt="100%" />
             </div>
           </div>
         </div>
@@ -342,7 +342,7 @@ const Home: NextPage = () => {
           </h1>
           <div className="flex justify-center">
             <Image width={400}  
-      height={400} src="/Pie-chart1.png" alt="" />
+      height={400} src="/assets/Pie-chart1.png" alt="" />
           </div>
           <div className="flex justify-center gap-3">
             <div className="w-3 h-3 border border-white bg-[#E62E2D] mt-1 flex-shrink-0"></div>
@@ -371,7 +371,7 @@ const Home: NextPage = () => {
                   
                   height={200}
                   className="mx-auto"
-                  src="/picture5-1.png"
+                  src="/assets/picture5-1.png"
                   alt=""
                 />
               </div>
@@ -501,7 +501,7 @@ const Home: NextPage = () => {
                   
                   height={140}
                   className="mx-auto"
-                  src="/picture5-2.png"
+                  src="/assets/picture5-2.png"
                   alt=""
                 />
               </div>
@@ -532,7 +532,7 @@ const Home: NextPage = () => {
                   width={140}
                   height={140}
                   className="mx-auto"
-                  src="/picture5-3.png"
+                  src="/assets/picture5-3.png"
                   alt=""
                 />
               </div>
@@ -951,7 +951,7 @@ const Home: NextPage = () => {
             <span className="text-white">Oceania</span>
           </div>
           <div className="flex justify-center">
-            <Image width={400} height={400} src="/Pie-chart2.png" alt="" />
+            <Image width={400} height={400} src="/assets/Pie-chart2.png" alt="" />
           </div>
           <h2 className="lg:text-3xl font-semibold text-center text-white sm:text-xl md:text-xl mt-10">
             GET YOUR SHARE OF THE MARKET
@@ -1318,7 +1318,7 @@ const Home: NextPage = () => {
             </div>
             <div className="flex justify-center">
               <Image   width={500}
-               height={500}  src="/Picture3.png" alt="" />
+               height={500}  src="/assets/Picture3.png" alt="" />
             </div>
           </div>
         </div>
