@@ -20,7 +20,6 @@ import { ChevronDownIcon } from "@heroicons/react/20/solid";
 import { classNames } from "../lib/classNames";
 import { LuckyMeAddress } from "../lib/contract";
 import { useRouter } from "next/router";
-import Image from "next/image";
 
 const products = [
   {
@@ -85,7 +84,6 @@ export default function Header({
           <div className="flex lg:flex-1">
             <Link href="/">
               <span className="sr-only">Lucky Me</span>
-<<<<<<< HEAD
               <Image
                 // className="h-16 w-auto"
                 width={80}
@@ -93,10 +91,6 @@ export default function Header({
                 src="/Lucky-Me.png"
                 alt="Lucky Me"
               />
-=======
-              <Image className="h-16 w-auto"  width={500}
-      height={500} src="/Lucky-Me.png" alt="Lucky Me" />
->>>>>>> 536f7d2e07b30487cc3191bbfd37e312519c249b
             </Link>
           </div>
           <div className="flex lg:hidden">
@@ -210,16 +204,10 @@ export default function Header({
               <Link href="/" className="-m-1.5 p-1.5">
                 <span className="sr-only">Lucky Me</span>
                 <Image
-<<<<<<< HEAD
                   // className="h-16 w-auto"
                   width={80}
                   height={80}
-=======
-                  className="h-16 w-auto"
->>>>>>> 536f7d2e07b30487cc3191bbfd37e312519c249b
                   src="/Lucky-Me.png"
-                  width={500}
-                  height={500}
                   alt="Lucky Me"
                 />
               </Link>
