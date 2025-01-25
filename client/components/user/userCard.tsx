@@ -175,10 +175,10 @@ const UserCard = ({ userId, mode }: { userId: any; mode?: string }) => {
             "en-US"
           )}
           <Image
-            className="w-[16px]  ml-1 inline-block"
+            className="w-[28px]  ml-1 inline-block"
             width={500}
             height={500}
-            src="/Dai.png"
+            src="/assets/gLogo.png"
             alt="Dai"
           />
         </div>
@@ -203,10 +203,10 @@ const UserCard = ({ userId, mode }: { userId: any; mode?: string }) => {
           <span className="mr-2 text-lg">Prizes Won</span>
           <span className="flex">
             <Image
-              className="w-[20px] h-[20px] mr-1"
+              className="w-[28px] h-[28px] mr-1"
               width={500}
               height={500}
-              src="/Dai.png"
+              src="/assets/gLogo.png"
               alt="Dai"
             />
             <p className="text-lg">
@@ -221,10 +221,10 @@ const UserCard = ({ userId, mode }: { userId: any; mode?: string }) => {
           <span className="mr-2 text-lg">Games Picks Rewards</span>
           <span className="flex">
             <Image
-              className="w-[20px] h-[20px] mr-1"
+              className="w-[28px] h-[28px] mr-1"
               width={500}
               height={500}
-              src="/Dai.png"
+              src="/assets/gLogo.png"
               alt="Dai"
             />
             <p className="text-lg">
@@ -239,10 +239,10 @@ const UserCard = ({ userId, mode }: { userId: any; mode?: string }) => {
           <span className="mr-2 text-lg">Prizes Rewards</span>
           <span className="flex">
             <Image
-              className="w-[20px] h-[20px] mr-1"
+              className="w-[28px] h-[28px] mr-1"
               width={500}
               height={500}
-              src="/Dai.png"
+              src="/assets/gLogo.png"
               alt="Dai"
             />
             <p className="text-lg">
@@ -257,10 +257,10 @@ const UserCard = ({ userId, mode }: { userId: any; mode?: string }) => {
           <span className="mr-2 text-lg">Membership Rewards</span>
           <span className="flex">
             <Image
-              className="w-[20px] h-[20px] mr-1"
+              className="w-[28px] h-[28px] mr-1"
               width={500}
               height={500}
-              src="/Dai.png"
+              src="/assets/gLogo.png"
               alt="Dai"
             />
             <p className="text-lg">
