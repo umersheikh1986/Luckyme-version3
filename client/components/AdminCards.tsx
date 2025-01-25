@@ -1,14 +1,16 @@
 import { useContract, useContractRead } from "@thirdweb-dev/react";
-import { LuckyMeAddress ,LuckyMeAbi} from "../lib/contract";
+import { LuckyMeAddress, LuckyMeAbi } from "../lib/contract";
 import { formatEther } from "ethers/lib/utils";
 
 const AdminCards = () => {
-  const { contract, error: contractError } = useContract(LuckyMeAddress, LuckyMeAbi);
-  
+  const { contract, error: contractError } = useContract(
+    LuckyMeAddress,
+    LuckyMeAbi
+  );
 
   const { data: Members, isLoading: MembersIsLoading } = useContractRead(
     contract,
-    "Members",
+    "Members"
   );
   const { data: Partners, isLoading: PartnersIsLoading } = useContractRead(
     contract,
@@ -16,11 +18,11 @@ const AdminCards = () => {
   );
   const { data: TotalRewardsPaid, isLoading: TotalRewardsPaidIsLoading } =
     useContractRead(contract, "TotalRewardsPaid");
-    console.log(String(TotalRewardsPaid), "TotalRewardsPaid");
+  console.log(String(TotalRewardsPaid), "TotalRewardsPaid");
   const { data: TotalPicksAmount, isLoading: TotalPicksAmountIsLoading } =
     useContractRead(contract, "TotalPicksAmount");
   console.log(String(TotalPicksAmount), "TotalPicksAmount>>");
-  
+
   if (contractError) {
     // console.error("Contract initialization error:", contractError);
     return <div>Error initializing contract</div>;
@@ -159,7 +161,7 @@ const AdminCards = () => {
           {Number(formatEther(String(TotalPicksAmount || 0))).toLocaleString(
             "en-US"
           )}{" "}
-          DAI
+          Gentop
         </div>
       </div>
     </div>

@@ -60,7 +60,7 @@ const GameDetailsCard = ({
                 className="w-[16px] h-[16px] ml-1 inline-flex"
                 width={500}
                 height={500}
-                src="/Dai.png"
+                src="/assets/gLogo.png"
                 alt="Dai"
               />
             </div>
@@ -71,7 +71,7 @@ const GameDetailsCard = ({
                 className="w-[16px] h-[16px] ml-1 inline-flex"
                 width={500}
                 height={500}
-                src="/Dai.png"
+                src="/assets/gLogo.png"
                 alt="Dai"
               />
             </div>
