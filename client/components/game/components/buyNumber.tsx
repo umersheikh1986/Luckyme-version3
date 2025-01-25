@@ -45,7 +45,7 @@ export default function BuyNumber({
     LuckyMeAddress
   );
 
-  console.log("this is allownace method",balance);
+  console.log("this is allownace method", balance);
   // Write functions
   const { mutateAsync: approve, isLoading: approveIsLoading } =
     useContractWrite(daiContract, "approve");
@@ -199,7 +199,7 @@ export default function BuyNumber({
                                 </svg>
                               )}
                             </span>
-                            Approve {formatEther(String(entryFee))} DAI
+                            Approve {formatEther(String(entryFee))} GENTOP
                           </button>
                         )}
 

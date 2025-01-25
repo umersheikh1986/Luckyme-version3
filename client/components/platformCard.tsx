@@ -75,7 +75,7 @@ function TotalRewardsPaid() {
                 Number(formatEther(String(data?.MemberRef || 0)))
             )
           ).toLocaleString("en-US")}{" "}
-          DAI
+          GENTOP
         </div>
       </div>
 
@@ -85,7 +85,7 @@ function TotalRewardsPaid() {
           {Number(formatEther(String(data?.Prize || 0))).toLocaleString(
             "en-US"
           )}
-          {""} DAI
+          {""} GENTOP
         </div>
       </div>
 
@@ -97,7 +97,7 @@ function TotalRewardsPaid() {
           {Number(formatEther(String(data?.PicksRef || 0))).toLocaleString(
             "en-US"
           )}{" "}
-          DAI
+          GENTOP
         </div>
       </div>
 
@@ -107,7 +107,7 @@ function TotalRewardsPaid() {
           {Number(formatEther(String(data?.PrizesRef || 0))).toLocaleString(
             "en-US"
           )}{" "}
-          DAI
+          GENTOP
         </div>
       </div>
 
@@ -119,7 +119,7 @@ function TotalRewardsPaid() {
           {Number(formatEther(String(data?.MemberRef || 0))).toLocaleString(
             "en-US"
           )}{" "}
-          DAI
+          GENTOP
         </div>
       </div>
     </>
@@ -152,6 +152,7 @@ function JOINEDLAST24HOURS() {
 
     if (hours >= 0 && hours < 24) {
       counter++;
+      console.log("This is Counter", counter);
     } else {
       break;
     }
