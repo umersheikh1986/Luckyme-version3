@@ -111,7 +111,7 @@ const GameCard = ({
           "en-US"
         )}
         <Image
-          className="w-[16px] h-[16px] ml-1 inline-flex"
+          className="w-[20px] h-[20px] ml-1 inline-flex"
           width={500}
           height={500}
           src="/assets/gLogo.png"
