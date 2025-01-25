@@ -5,56 +5,27 @@ import {
   useContractRead,
 } from "@thirdweb-dev/react";
 import Link from "next/link";
-import { LuckyMeAddress } from "../../lib/contract";
+import { LuckyMeAddress,LuckyMeAbi } from "../../lib/contract";
 import { useContractWrite } from "@thirdweb-dev/react";
-import { formatEther, parseEther } from "ethers/lib/utils";
+import { formatEther, parseEther } from "ethers/lib/utils"; 
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { classNames } from "../../lib/classNames";
-import { DaiAbi, DaiAddress } from "../../lib/contract";
+import { DaiAbi, DaiAddress  } from "../../lib/contract";
 import Image from "next/image";
 
-const Index = ({ id }: { id?: any }) => {
-  const address = useAddress();
-  const { contract } = useContract(LuckyMeAddress);
-  const { data, isLoading } = useContractRead(contract, "userDetail", address);
 
-  return (
-    <main className="mx-auto max-w-[500px] px-4 grid items-center py-8 sm:px-6 lg:px-8">
-      {address === undefined ? (
-        <ConnectWallet className="!bg-[#660e22] !border-2 !border-white/40" />
-      ) : (
-        <div className="px-8 py-4 w-full rounded-lg mx-auto bg-[#660e22] border-2 border-white/40">
-          {String(data?.Id || 0) !== "0" ? (
-            <div>
-              <p className="mt-3 text-center text-lg tracking-tight text-white">
-                You are already registered please go to dashboard.
-              </p>
-              <Link
-                className="group items-center justify-center block w-full text-center mt-3 rounded-full py-3 px-10 text-sm font-semibold focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 bg-slate-900 text-white hover:bg-slate-700 hover:text-slate-100 active:bg-slate-800 active:text-slate-300 focus-visible:outline-slate-900"
-                href="/dashboard"
-              >
-                Dashboard
-              </Link>
-            </div>
-          ) : (
-            <UserRegisterThroughLink href="/dashboard" />
-          )}
-        </div>
-      )}
-    </main>
-  );
-};
 
 const UserRegisterThroughLink = ({ href }: { href?: string }) => {
   const router = useRouter();
   const address = useAddress();
-  const [id, setId] = useState<number>();
-  const [selectedOption, setSelectedOption] = useState("10.0");
+  const [id, setId] = useState<string>();
+  console.log("this is user creation id ",id)
+  const [selectedOption, setSelectedOption] = useState("1.0");
 
   //    contracts
   const { contract: daiContract } = useContract(DaiAddress, DaiAbi);
-  const { contract: LuckyMeContract } = useContract(LuckyMeAddress);
+  const { contract: LuckyMeContract } = useContract(LuckyMeAddress ,LuckyMeAbi);
 
   //    Read functions
   const { data: balance, isLoading: balanceIsLoading } = useContractRead(
@@ -62,6 +33,7 @@ const UserRegisterThroughLink = ({ href }: { href?: string }) => {
     "balanceOf",
     address
   );
+  // console.log("balance :", (balance).toString())
   const { data: allowance, isLoading: allowanceIsLoading } = useContractRead(
     daiContract,
     "allowance",
@@ -75,7 +47,7 @@ const UserRegisterThroughLink = ({ href }: { href?: string }) => {
   const callApprove = async () => {
     try {
       const data = await approve([LuckyMeAddress, parseEther(selectedOption)]);
-      console.info("contract call success", data);
+      console.info("contract call success for approve function ", data);
     } catch (err) {
       console.error("contract call failure", err);
     }
@@ -84,13 +56,13 @@ const UserRegisterThroughLink = ({ href }: { href?: string }) => {
   const { mutateAsync: register, isLoading: registerIsLoading } =
     useContractWrite(LuckyMeContract, "register");
   const callRegister = async () => {
+  
+     console.log("this is r file path" ,id,selectedOption,address);
+     const data = await register([id,"0", address, {
+      gasLimit: 3000000, // Adjust gas limit
+    }]);
+    console.info("contract call success", data);
     try {
-      const data = await register([
-        id !== undefined ? id : 1,
-        selectedOption === "1.0" ? 0 : 1,
-        address,
-      ]);
-      console.info("contract call success", data);
       if (href !== undefined) router.push(href);
     } catch (err) {
       console.error("contract call failure", err);
@@ -108,8 +80,8 @@ const UserRegisterThroughLink = ({ href }: { href?: string }) => {
 
     if (match) {
       const number = parseInt(match[1], 10);
-      setId(number);
-      console.log(number);
+      setId(number.toString());
+      console.log(number.toString());
     } else {
       console.log("No number found in link");
     }
@@ -251,7 +223,8 @@ const UserRegisterThroughLink = ({ href }: { href?: string }) => {
         <div className="flex justify-between text-[18px] text-white">
           <span>Your Balance</span>
           <span className="flex">
-            <Image className="w-[20px] mr-1" src="/Dai.png" alt="Dai" />
+            <Image className="w-[20px] mr-1"  width={500}
+      height={500} src="/Dai.png" alt="Dai" />
             <p>{formatEther(String(balance || 0))}</p>
           </span>
         </div>
@@ -266,7 +239,8 @@ const UserRegisterThroughLink = ({ href }: { href?: string }) => {
         <div className="flex justify-between text-[18px] text-white">
           <span>Your Allowance</span>
           <span className="flex">
-            <Image className="w-[20px] mr-1" src="/Dai.png" alt="Dai" />
+            <Image className="w-[20px] mr-1"  width={500}
+                height={500} src="/Dai.png" alt="Dai" />
             <p>{formatEther(String(allowance || 0))}</p>
           </span>
         </div>
@@ -274,5 +248,36 @@ const UserRegisterThroughLink = ({ href }: { href?: string }) => {
     </>
   );
 };
-
+const Index = ({ id }: { id?: any }) => {
+  const address = useAddress();
+  const { contract } = useContract(LuckyMeAddress);
+  const { data, isLoading } = useContractRead(contract, "userDetail", address);
+  console.log("testing data of fuction",data,address);
+  
+  return (
+    <main className="mx-auto max-w-[500px] px-4 grid items-center py-8 sm:px-6 lg:px-8">
+      {address === undefined ? (
+        <ConnectWallet className="!bg-[#660e22] !border-2 !border-white/40" />
+      ) : (
+        <div className="px-8 py-4 w-full rounded-lg mx-auto bg-[#660e22] border-2 border-white/40">
+          {String(data?.Id || 0) !== "0" ? (
+            <div>
+              <p className="mt-3 text-center text-lg tracking-tight text-white">
+                You are already registered please go to dashboard.
+              </p>
+              <Link
+                className="group items-center justify-center block w-full text-center mt-3 rounded-full py-3 px-10 text-sm font-semibold focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 bg-slate-900 text-white hover:bg-slate-700 hover:text-slate-100 active:bg-slate-800 active:text-slate-300 focus-visible:outline-slate-900"
+                href="/dashboard"
+              >
+                Dashboard
+              </Link>
+            </div>
+          ) : (
+            <UserRegisterThroughLink href="/dashboard" />
+          )}
+        </div>
+      )}
+    </main>
+  );
+};
 export default Index;

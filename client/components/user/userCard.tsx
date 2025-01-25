@@ -176,6 +176,8 @@ const UserCard = ({ userId, mode }: { userId: any; mode?: string }) => {
           )}
           <Image
             className="w-[16px]  ml-1 inline-block"
+            width={500}
+            height={500}
             src="/Dai.png"
             alt="Dai"
           />
@@ -202,6 +204,8 @@ const UserCard = ({ userId, mode }: { userId: any; mode?: string }) => {
           <span className="flex">
             <Image
               className="w-[20px] h-[20px] mr-1"
+              width={500}
+              height={500}
               src="/Dai.png"
               alt="Dai"
             />
@@ -218,6 +222,8 @@ const UserCard = ({ userId, mode }: { userId: any; mode?: string }) => {
           <span className="flex">
             <Image
               className="w-[20px] h-[20px] mr-1"
+              width={500}
+              height={500}
               src="/Dai.png"
               alt="Dai"
             />
@@ -234,6 +240,8 @@ const UserCard = ({ userId, mode }: { userId: any; mode?: string }) => {
           <span className="flex">
             <Image
               className="w-[20px] h-[20px] mr-1"
+              width={500}
+              height={500}
               src="/Dai.png"
               alt="Dai"
             />
@@ -250,6 +258,8 @@ const UserCard = ({ userId, mode }: { userId: any; mode?: string }) => {
           <span className="flex">
             <Image
               className="w-[20px] h-[20px] mr-1"
+              width={500}
+              height={500}
               src="/Dai.png"
               alt="Dai"
             />
@@ -322,7 +332,7 @@ const UserCard = ({ userId, mode }: { userId: any; mode?: string }) => {
             <CopyToClipboardButton text={String(LuckyMeAddress)} />
 
             <a
-              href={`https://polygonscan.com/address/${LuckyMeAddress}`}
+              href={`https://holesky.etherscan.io//address/${LuckyMeAddress}`}
               target="_blank"
             >
               <svg
@@ -351,7 +361,7 @@ const UserCard = ({ userId, mode }: { userId: any; mode?: string }) => {
             <CopyToClipboardButton text={String(data?.Address)} />
 
             <a
-              href={`https://polygonscan.com/address/${data?.Address}`}
+              href={`https://holesky.etherscan.io/address/${data?.Address}`}
               target="_blank"
             >
               <svg
