@@ -49,12 +49,14 @@ const UserRegister = ({ id, href }: { id?: any; href?: string }) => {
     useContractWrite(LuckyMeContract, "register");
   const callRegister = async () => {
     try {
-      console.log(id,selectedOption,address);
+      console.log("This is UserRegister Pages",id,selectedOption == "1.0" ? 0 : 1,address);
       
       const data1 = await register([
        id,
-       selectedOption,
-        address,
+       selectedOption == "1.0" ? 0 : 1,"1340",
+        address, {
+          gasLimit: 3000000, // Adjust gas limit
+        }
       ]);
       console.log("Registration successful:", data1);
     } catch (error) {
@@ -90,8 +92,8 @@ const UserRegister = ({ id, href }: { id?: any; href?: string }) => {
             onChange={(e) => setSelectedOption(e.target.value)}
             className="mt-1 block w-full rounded-md border-0  py-1.5  shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6"
           >
-            <option value={"10.0"}>Premium 10 DAI</option>
-            <option value={"1.0"}>Standard 1 DAI</option>
+            <option value={"10.0"}>Premium 10 Gentop</option>
+            <option value={"1.0"}>Standard 1 Gentop</option>
           </select>
         </div>
 
@@ -128,7 +130,7 @@ const UserRegister = ({ id, href }: { id?: any; href?: string }) => {
                 )}
               </span>
               Approve{" "}
-              {Number(String(selectedOption || 0)).toLocaleString("en-US")} DAI
+              {Number(String(selectedOption || 0)).toLocaleString("en-US")} Gentop
             </button>
           )}
 
@@ -181,7 +183,7 @@ const UserRegister = ({ id, href }: { id?: any; href?: string }) => {
           <span>Your Balance</span>
           <span className="flex">
             <Image className="w-[20px] mr-1"  width={500}
-      height={500} src="/Dai.png" alt="Dai" />
+      height={500} src="/assets/gLogo.png" alt="Dai" />
             <p>{formatEther(String(balance || 0))}</p>
           </span>
         </div>

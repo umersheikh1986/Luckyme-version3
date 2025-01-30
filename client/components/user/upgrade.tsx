@@ -6,7 +6,7 @@ import {
   useContractRead,
   useContractWrite,
 } from "@thirdweb-dev/react";
-import { DaiAbi, DaiAddress, LuckyMeAddress } from "../../lib/contract";
+import { DaiAbi, DaiAddress, LuckyMeAddress,LuckyMeAbi } from "../../lib/contract";
 import { formatEther, parseEther } from "ethers/lib/utils";
 
 export default function Upgrade({
@@ -24,7 +24,7 @@ export default function Upgrade({
 
   //    contracts
   const { contract: daiContract } = useContract(DaiAddress, DaiAbi);
-  const { contract: LuckyMeContract } = useContract(LuckyMeAddress);
+  const { contract: LuckyMeContract } = useContract(LuckyMeAddress,LuckyMeAbi);
 
   //    Read functions
   const { data: balance, isLoading: balanceIsLoading } = useContractRead(
@@ -44,7 +44,7 @@ export default function Upgrade({
     useContractWrite(daiContract, "approve");
   const callApprove = async () => {
     try {
-      const newData = await approve([LuckyMeAddress, parseEther("10")]);
+      const newData = await approve([LuckyMeAddress, parseEther("13400.0")]);
     } catch (err) {
       console.error("contract call failure", err);
     }
@@ -54,7 +54,9 @@ export default function Upgrade({
     useContractWrite(LuckyMeContract, "upgradePlan");
   const callUpgrade = async () => {
     try {
-      const newData = await upgradePlan([String(data?.Id)]);
+      const amount = "13400.0";
+      const newData = await upgradePlan([String(data?.Id),amount]);
+      console.log("This is new data according to upgradePlan",newData)
       setOpen(false);
     } catch (err) {
       console.error("contract call failure", err);
@@ -142,7 +144,7 @@ export default function Upgrade({
                             </svg>
                           )}
                         </span>
-                        Approve 10.0 DAI
+                        Approve 10.0 Gentop
                       </button>
                     )}
                   <button
