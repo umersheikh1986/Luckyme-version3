@@ -457,10 +457,11 @@ import Link from "next/link";
 import { LuckyMeAddress, LuckyMeAbi, DaiAbi, DaiAddress } from "../../lib/contract";
 import { formatEther, parseEther } from "ethers/lib/utils";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useState ,useEffect} from "react";
 
 const GENTOPS_PER_USDT = 1340.4; // Conversion rate
 const AMOUNT_IN_GENTOPS = 1340; // Fixed registration amount
+
 
 const UserRegisterThroughLink = ({ href }: { href?: string }) => {
   const router = useRouter();
@@ -468,6 +469,9 @@ const UserRegisterThroughLink = ({ href }: { href?: string }) => {
   
   const [refId, setRefId] = useState<string | null>(null);
   const [selectedOption, setSelectedOption] = useState("13400.0");
+  const [isApproved, setIsApproved] = useState(false); // Track approval status
+
+  const [priceOftotalGentops,SetpriceOftotalGentops] = useState<string | null>(null)
 
   const { contract: daiContract } = useContract(DaiAddress, DaiAbi);
   const { contract: LuckyMeContract } = useContract(LuckyMeAddress, LuckyMeAbi);
@@ -484,6 +488,58 @@ const UserRegisterThroughLink = ({ href }: { href?: string }) => {
   //     console.error("Approval failed", err);
   //   }
   // };
+  async function getPriceOfUSDTInGentop() {
+    const apiKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJub25jZSI6ImM5YzIzNjY4LTdhMmMtNGMxNi05NjZhLWY0ZWEyOTFjYzczZCIsIm9yZ0lkIjoiNDI3NzUzIiwidXNlcklkIjoiNDM5OTk1IiwidHlwZUlkIjoiNGE3YWRjMTQtMTgzZS00NTI2LTk0MzMtYmVjMGEwNWYyMDRiIiwidHlwZSI6IlBST0pFQ1QiLCJpYXQiOjE3Mzc5ODMzOTgsImV4cCI6NDg5Mzc0MzM5OH0.wF6kKB3EhhDMIn1CsLATm1dDxDGkvxCvIor86g5vCfE'; // Replace with your API Key
+    const usdtAddress = '0x55d398326f99059fF775485246999027B3197955'; // USDT contract address on BSC
+    const gentopTokenAddress = '0x4DF17Ed886b3237fDbc29EdB6e4dc986433f2377'; // Replace with the gentop token contract address
+    const chain = 'bsc'; // Specify the blockchain
+  
+    // Moralis Web3 API endpoint for fetching token price
+    const url = `https://deep-index.moralis.io/api/v2/erc20/${usdtAddress}/price?chain=${chain}`;
+  
+    const response = await fetch(url, {
+      method: 'GET',
+      headers: {
+        'X-API-Key': apiKey, // API key in the headers
+      },
+    });
+  
+    if (!response.ok) {
+      console.error('Error fetching token price:', response.statusText);
+      return;
+    }
+  
+    const data = await response.json();
+    const usdtPrice = data?.usdPrice; // Get price in USD (for example)
+    console.log("this is usdt Price",usdtPrice)
+  
+    // Now get the price of gentop in terms of USDT
+    const gentopPriceUrl = `https://deep-index.moralis.io/api/v2/erc20/${gentopTokenAddress}/price?chain=${chain}`;
+  
+    const gentopResponse = await fetch(gentopPriceUrl, {
+      method: 'GET',
+      headers: {
+        'X-API-Key': apiKey,
+      },
+    });
+  
+    if (!gentopResponse.ok) {
+      console.error('Error fetching gentop price:', gentopResponse.statusText);
+      return;
+    }
+  
+    const gentopData = await gentopResponse.json();
+    const gentopPrice = gentopData?.usdPrice;
+  
+    // Now calculate the ratio of 1 USDT in gentop
+    const priceInGentop = (usdtPrice / gentopPrice)*10;
+    SetpriceOftotalGentops(priceInGentop.toFixed(2).toString());
+    console.log(`1 USDT Price = ${priceInGentop} gentop`);
+  }
+  
+  useEffect(() => {
+    getPriceOfUSDTInGentop();
+  }, []);
   const callApprove = async () => {
     try {
       const amountToApprove = parseEther(selectedOption.toString()); // Use selected option for approval
@@ -491,6 +547,7 @@ const UserRegisterThroughLink = ({ href }: { href?: string }) => {
   
       const data = await approve([LuckyMeAddress,parseEther(selectedOption)]);
       console.info("Approval success", data);
+      setIsApproved(true);
     } catch (err) {
       console.error("Approval failed", err);
     }
@@ -526,7 +583,7 @@ const UserRegisterThroughLink = ({ href }: { href?: string }) => {
     }
   
     try {
-      const planType = selectedOption === "0" ? 1 : 0; // Adjust plan type dynamically
+      const planType = selectedOption === "0" ? "1" : "0"; // Adjust plan type dynamically
       const amount = parseEther(selectedOption.toString()); // Use selectedOption
   
       console.log("Registering with:", refId, planType, address, amount.toString());
@@ -580,23 +637,33 @@ const UserRegisterThroughLink = ({ href }: { href?: string }) => {
               className="mt-1 block w-full rounded-md py-1.5 text-gray-900 shadow-sm ring-1 ring-gray-300 focus:ring-2 focus:ring-blue-600"
             >
               {/* <option value={"68240.0"}>Premium 20 USDT</option> */}
-              <option value={"13400.0"}>Premium 10 USDT</option>
+              <option value={priceOftotalGentops?.toString()|| "13400.0"}>Premium 10 USDT</option>
 
               <option value={"0.0"}>Standard 1 USDT</option>
             </select>
           </div>
 
-          {Number(formatEther(String(allowance || 0))) < AMOUNT_IN_GENTOPS &&
+          {/* {Number(formatEther(String(allowance || 0))) < AMOUNT_IN_GENTOPS &&
             Number(formatEther(String(balance || 0))) >= AMOUNT_IN_GENTOPS && (
               <button
                 className="mb-3 w-full rounded-lg bg-[#360712] px-3 py-3 text-white shadow-sm border-2 border-white/40 hover:opacity-60"
                 onClick={callApprove}
               >
                 {/* {approveIsLoading ? "Approving..." : `Approve ${AMOUNT_IN_GENTOPS} GENTOPS`} */}
-                {approveIsLoading ? "Approving..." : `Approved ${selectedOption} GENTOPS`}
+                {/* {approveIsLoading ? "Approving..." : `Approve ${selectedOption} GENTOPS`}
 
-              </button>
-            )}
+              </button> */}
+            {/* // )}  */}
+            {!isApproved && 
+  Number(formatEther(String(allowance || 0))) < AMOUNT_IN_GENTOPS &&
+  Number(formatEther(String(balance || 0))) >= AMOUNT_IN_GENTOPS && (
+    <button
+      className="mb-3 w-full rounded-lg bg-[#360712] px-3 py-3 text-white shadow-sm border-2 border-white/40 hover:opacity-60"
+      onClick={callApprove}
+    >
+      {approveIsLoading ? "Approving..." : `Approve ${selectedOption} GENTOPS`}
+    </button>
+)}
 
           {Number(formatEther(String(balance || 0))) >= AMOUNT_IN_GENTOPS ? (
             <button
@@ -608,8 +675,10 @@ const UserRegisterThroughLink = ({ href }: { href?: string }) => {
           ) : (
             <div className="text-center text-red-500">Insufficient balance for registration</div>
           )}
+
         </>
       )}
+      
     </div>
   );
 };
