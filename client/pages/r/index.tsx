@@ -469,8 +469,6 @@ const UserRegisterThroughLink = ({ href }: { href?: string }) => {
   
   const [refId, setRefId] = useState<string | null>(null);
   const [selectedOption, setSelectedOption] = useState("13400.0");
-  const [isApproved, setIsApproved] = useState(false); // Track approval status
-
   const [priceOftotalGentops,SetpriceOftotalGentops] = useState<string | null>(null)
 
   const { contract: daiContract } = useContract(DaiAddress, DaiAbi);
@@ -547,7 +545,6 @@ const UserRegisterThroughLink = ({ href }: { href?: string }) => {
   
       const data = await approve([LuckyMeAddress,parseEther(selectedOption)]);
       console.info("Approval success", data);
-      setIsApproved(true);
     } catch (err) {
       console.error("Approval failed", err);
     }
@@ -583,12 +580,12 @@ const UserRegisterThroughLink = ({ href }: { href?: string }) => {
     }
   
     try {
-      const planType = selectedOption === "0" ? "1" : "0"; // Adjust plan type dynamically
+      const planType = selectedOption === "0" ? 1 : 0; // Adjust plan type dynamically
       const amount = parseEther(selectedOption.toString()); // Use selectedOption
   
       console.log("Registering with:", refId, planType, address, amount.toString());
   
-      const data = await register([refId, selectedOption == "1.0" ? "0" : "1", address, amount, { gasLimit: 3000000 }]);
+      const data = await register([refId, selectedOption == "1.0" ? "0" : "1", address,amount, { gasLimit: 3000000 }]);
       console.info("Registration successful", data);
   
       if (href) router.push(href);
@@ -643,27 +640,17 @@ const UserRegisterThroughLink = ({ href }: { href?: string }) => {
             </select>
           </div>
 
-          {/* {Number(formatEther(String(allowance || 0))) < AMOUNT_IN_GENTOPS &&
+          {Number(formatEther(String(allowance || 0))) < AMOUNT_IN_GENTOPS &&
             Number(formatEther(String(balance || 0))) >= AMOUNT_IN_GENTOPS && (
               <button
                 className="mb-3 w-full rounded-lg bg-[#360712] px-3 py-3 text-white shadow-sm border-2 border-white/40 hover:opacity-60"
                 onClick={callApprove}
               >
                 {/* {approveIsLoading ? "Approving..." : `Approve ${AMOUNT_IN_GENTOPS} GENTOPS`} */}
-                {/* {approveIsLoading ? "Approving..." : `Approve ${selectedOption} GENTOPS`}
+                {approveIsLoading ? "Approving..." : `Approve ${selectedOption} GENTOPS`}
 
-              </button> */}
-            {/* // )}  */}
-            {!isApproved && 
-  Number(formatEther(String(allowance || 0))) < AMOUNT_IN_GENTOPS &&
-  Number(formatEther(String(balance || 0))) >= AMOUNT_IN_GENTOPS && (
-    <button
-      className="mb-3 w-full rounded-lg bg-[#360712] px-3 py-3 text-white shadow-sm border-2 border-white/40 hover:opacity-60"
-      onClick={callApprove}
-    >
-      {approveIsLoading ? "Approving..." : `Approve ${selectedOption} GENTOPS`}
-    </button>
-)}
+              </button>
+            )}
 
           {Number(formatEther(String(balance || 0))) >= AMOUNT_IN_GENTOPS ? (
             <button
@@ -675,10 +662,8 @@ const UserRegisterThroughLink = ({ href }: { href?: string }) => {
           ) : (
             <div className="text-center text-red-500">Insufficient balance for registration</div>
           )}
-
         </>
       )}
-      
     </div>
   );
 };

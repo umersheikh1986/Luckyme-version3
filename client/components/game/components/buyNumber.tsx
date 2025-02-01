@@ -918,7 +918,7 @@
 //   );
 // }
 
-import { Fragment, useRef } from "react";
+import { Fragment, useRef,useState,useEffect } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import {
   useAddress,
@@ -944,7 +944,7 @@ export default function BuyNumber({
   setOpen: any;
   SetError: any;
   userId: any;
-  entryFee: any;
+  entryFee: number;
   number: number;
   Id: number;
 }) {
@@ -954,6 +954,7 @@ export default function BuyNumber({
   // Contracts
   const { contract: daiContract } = useContract(DaiAddress, DaiAbi);
   const { contract: LuckyMeContract } = useContract(LuckyMeAddress);
+   const [priceOftotalGentops,SetpriceOftotalGentops] = useState("1340.99")
 
   // Read functions
   const { data: balance } = useContractRead(daiContract, "balanceOf", address);
@@ -968,19 +969,79 @@ export default function BuyNumber({
   console.log("Allowance:", Number(allowance));
 
   // Write functions
+    async function getPriceOfUSDTInGentop() {
+      const apiKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJub25jZSI6ImM5YzIzNjY4LTdhMmMtNGMxNi05NjZhLWY0ZWEyOTFjYzczZCIsIm9yZ0lkIjoiNDI3NzUzIiwidXNlcklkIjoiNDM5OTk1IiwidHlwZUlkIjoiNGE3YWRjMTQtMTgzZS00NTI2LTk0MzMtYmVjMGEwNWYyMDRiIiwidHlwZSI6IlBST0pFQ1QiLCJpYXQiOjE3Mzc5ODMzOTgsImV4cCI6NDg5Mzc0MzM5OH0.wF6kKB3EhhDMIn1CsLATm1dDxDGkvxCvIor86g5vCfE'; // Replace with your API Key
+      const usdtAddress = '0x55d398326f99059fF775485246999027B3197955'; // USDT contract address on BSC
+      const gentopTokenAddress = '0x4DF17Ed886b3237fDbc29EdB6e4dc986433f2377'; // Replace with the gentop token contract address
+      const chain = 'bsc'; // Specify the blockchain
+    
+      // Moralis Web3 API endpoint for fetching token price
+      const url = `https://deep-index.moralis.io/api/v2/erc20/${usdtAddress}/price?chain=${chain}`;
+    
+      const response = await fetch(url, {
+        method: 'GET',
+        headers: {
+          'X-API-Key': apiKey, // API key in the headers
+        },
+      });
+    
+      if (!response.ok) {
+        console.error('Error fetching token price:', response.statusText);
+        return;
+      }
+    
+      const data = await response.json();
+      const usdtPrice = data?.usdPrice; // Get price in USD (for example)
+      console.log("this is usdt Price",usdtPrice)
+    
+      // Now get the price of gentop in terms of USDT
+      const gentopPriceUrl = `https://deep-index.moralis.io/api/v2/erc20/${gentopTokenAddress}/price?chain=${chain}`;
+    
+      const gentopResponse = await fetch(gentopPriceUrl, {
+        method: 'GET',
+        headers: {
+          'X-API-Key': apiKey,
+        },
+      });
+    
+      if (!gentopResponse.ok) {
+        console.error('Error fetching gentop price:', gentopResponse.statusText);
+        return;
+      }
+    
+      const gentopData = await gentopResponse.json();
+      const gentopPrice = gentopData?.usdPrice;
+    
+      // Now calculate the ratio of 1 USDT in gentop
+      const priceInGentop = (usdtPrice / gentopPrice)*10;
+      SetpriceOftotalGentops(priceInGentop.toString());
+      console.log(`1 USDT Price = ${priceInGentop} gentop`);
+    }
+    
+    useEffect(() => {
+      getPriceOfUSDTInGentop();
+    }, []);
   const { mutateAsync: approve, isLoading: approveIsLoading } =
     useContractWrite(daiContract, "approve");
 
     const callApprove = async () => {
       try {
-        const gentopMultiplier = BigNumber.from(1340);
-        const entryFeeBN = BigNumber.from(entryFee || "0"); // Ensure entryFee is defined
+        const gentopMultiplier = priceOftotalGentops || "1340.99"; 
+        console.log("Gentop Price after Conversion:", gentopMultiplier);
     
-        const approvalAmount = entryFeeBN.mul(gentopMultiplier); // Correct multiplication
+        const entryFeeBN = entryFee || "0"; // Ensure entryFee is defined
+        console.log("Entry Fee:", entryFeeBN, entryFee);
     
-        console.log(`Approving: ${approvalAmount.toString()} Gentops`);
+        const approvalAmount = Number(entryFeeBN) * Number(gentopMultiplier);
+        console.log(`Approving: ${approvalAmount} Gentops`);
     
-        const data = await approve([LuckyMeAddress, approvalAmount]);
+        // Convert to string without scientific notation
+        const approvalAmountStr = approvalAmount.toLocaleString("fullwide", { useGrouping: false });
+    
+        // Convert the fixed number to BigNumber format
+        const amountToApprove = parseEther(approvalAmountStr);
+         console.log("This is amount Approved")
+        const data = await approve([LuckyMeAddress,amountToApprove]);
         console.log("Contract approval successful", data);
       } catch (err) {
         console.error("Contract approval failure", err);
@@ -992,14 +1053,29 @@ export default function BuyNumber({
 
     const callEnterGame = async () => {
       try {
-        const gentopMultiplier = BigNumber.from(1340);
-        const entryFeeBN = BigNumber.from(entryFee || "0");
+        // const gentopMultiplier = BigNumber.from(priceOftotalGentops || 1340);
+        // const entryFeeBN = BigNumber.from(entryFee || "0");
     
-        const amountInGentops = entryFeeBN.mul(gentopMultiplier);
+        // const amountInGentops = entryFeeBN.mul(gentopMultiplier);
     
-        console.log(`Converted Entry Fee: ${amountInGentops.toString()} Gentops`);
+        // console.log(`Converted Entry Fee: ${amountInGentops.toString()} Gentops`);
+        const gentopMultiplier = priceOftotalGentops || "1340.99"; 
+        console.log("Buy Gentop Price after Conversion:", gentopMultiplier);
     
-        const data = await enterGame([Id, number, userId, amountInGentops.toString()]);
+        const entryFeeBN = entryFee || "0"; // Ensure entryFee is defined
+        console.log("Buy Entry Fee:", Number(entryFeeBN), Number(entryFee));
+    
+        const approvalAmount = Number(entryFeeBN)/1e18 * Number(gentopMultiplier);
+        console.log(`Buying: ${approvalAmount} Gentops`);
+    
+        // Convert to string without scientific notation
+        const approvalAmountStr = approvalAmount.toLocaleString("fullwide", { useGrouping: false });
+    
+        // Convert the fixed number to BigNumber format
+        const amountToApprove = parseEther(approvalAmountStr);
+        
+        console.log("This is amount to buy gentop", Number(amountToApprove))
+        const data = await enterGame([Id, number, userId, amountToApprove]);
         SetError("done");
         console.info("Contract call success", data);
       } catch (err) {
@@ -1007,9 +1083,7 @@ export default function BuyNumber({
         SetError("error");
       }
     }
-    const allowanceInGentops = BigNumber.from(allowance || "0")
-  .div(BigNumber.from(10).pow(18)) // Convert from wei to ether
-  .toString(); 
+
 
   return (
     <Transition.Root show={open} as={Fragment}>
@@ -1069,9 +1143,9 @@ export default function BuyNumber({
                           </div>
          
 
-<div className="text-[16px] text-white">
-  Your Allowance:  {BigNumber.from(entryFee/1e18 || "0").mul(1340).toString()} Gentops
-</div>
+ <div className="text-[16px] text-white">
+  Your Allowance:    {(entryFee/1e18 * Number(priceOftotalGentops)||1340).toFixed(2)} Gentops
+</div> 
 
 {/* <div className="text-[16px] text-white">
   Remaining Balance After Approval:{" "}
@@ -1081,16 +1155,18 @@ export default function BuyNumber({
                       </div>
                     </div>
                     <div className="px-4 pb-4 sm:px-6">
-                      {BigNumber.from(allowance || "0").lt(BigNumber.from(entryFee).mul("1340")) &&
-                        BigNumber.from(balance || "0").gte(BigNumber.from(entryFee)) && (
+                      {
+                      // BigNumber.from(allowance || "0").lt(BigNumber.from(entryFee).mul(String(priceOftotalGentops))) &&
+                      //   BigNumber.from(balance || "0").gte(BigNumber.from(entryFee)) && (
                           <button
                             className="mb-3 block w-full rounded-lg bg-[#360712] px-3 py-2 text-[16px] text-white shadow-sm hover:opacity-60 border-2 border-white/40"
                             onClick={callApprove}
                             disabled={approveIsLoading}
                           >
-                            {approveIsLoading ? "Approving..." : `Approve ${(entryFee/1e18 * 1340)} Gentops`}
+                            {approveIsLoading ? "Approving..." : `Approve ${(entryFee/1e18 * Number(priceOftotalGentops)||1340).toFixed(2)} Gentops`}
                           </button>
-                        )}
+                        // )
+                        }
 
                       {BigNumber.from(balance || "0").gte(BigNumber.from(entryFee)) ? (
                         <button

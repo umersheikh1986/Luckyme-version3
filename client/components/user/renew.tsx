@@ -202,7 +202,7 @@
 //   );
 // }
 
-import { Fragment, useRef, useState } from "react";
+import { Fragment, useRef, useState ,useEffect} from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import {
   useAddress,
@@ -217,13 +217,16 @@ export default function Renew({
   open,
   setOpen,
   data,
+  entryFee
 }: {
   open: boolean;
   setOpen: any;
   data: any;
+  entryFee: number
 }) {
   const cancelButtonRef = useRef(null);
   const address = useAddress();
+  const [priceOftotalGentops,SetpriceOftotalGentops] = useState("1340.99")
 
   // Contracts
   const { contract: daiContract } = useContract(DaiAddress, DaiAbi);
@@ -236,13 +239,65 @@ export default function Renew({
   // Write functions
   const { mutateAsync: approve, isLoading: approveIsLoading } = useContractWrite(daiContract, "approve");
   const { mutateAsync: renew, isLoading: renewIsLoading } = useContractWrite(LuckyMeContract, "renew");
-
+ async function getPriceOfUSDTInGentop() {
+    const apiKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJub25jZSI6ImM5YzIzNjY4LTdhMmMtNGMxNi05NjZhLWY0ZWEyOTFjYzczZCIsIm9yZ0lkIjoiNDI3NzUzIiwidXNlcklkIjoiNDM5OTk1IiwidHlwZUlkIjoiNGE3YWRjMTQtMTgzZS00NTI2LTk0MzMtYmVjMGEwNWYyMDRiIiwidHlwZSI6IlBST0pFQ1QiLCJpYXQiOjE3Mzc5ODMzOTgsImV4cCI6NDg5Mzc0MzM5OH0.wF6kKB3EhhDMIn1CsLATm1dDxDGkvxCvIor86g5vCfE'; // Replace with your API Key
+    const usdtAddress = '0x55d398326f99059fF775485246999027B3197955'; // USDT contract address on BSC
+    const gentopTokenAddress = '0x4DF17Ed886b3237fDbc29EdB6e4dc986433f2377'; // Replace with the gentop token contract address
+    const chain = 'bsc'; // Specify the blockchain
+  
+    // Moralis Web3 API endpoint for fetching token price
+    const url = `https://deep-index.moralis.io/api/v2/erc20/${usdtAddress}/price?chain=${chain}`;
+  
+    const response = await fetch(url, {
+      method: 'GET',
+      headers: {
+        'X-API-Key': apiKey, // API key in the headers
+      },
+    });
+  
+    if (!response.ok) {
+      console.error('Error fetching token price:', response.statusText);
+      return;
+    }
+  
+    const data = await response.json();
+    const usdtPrice = data?.usdPrice; // Get price in USD (for example)
+    console.log("this is usdt Price",usdtPrice)
+  
+    // Now get the price of gentop in terms of USDT
+    const gentopPriceUrl = `https://deep-index.moralis.io/api/v2/erc20/${gentopTokenAddress}/price?chain=${chain}`;
+  
+    const gentopResponse = await fetch(gentopPriceUrl, {
+      method: 'GET',
+      headers: {
+        'X-API-Key': apiKey,
+      },
+    });
+  
+    if (!gentopResponse.ok) {
+      console.error('Error fetching gentop price:', gentopResponse.statusText);
+      return;
+    }
+  
+    const gentopData = await gentopResponse.json();
+    const gentopPrice = gentopData?.usdPrice;
+  
+    // Now calculate the ratio of 1 USDT in gentop
+    const priceInGentop = (usdtPrice / gentopPrice)*10;
+    SetpriceOftotalGentops(priceInGentop.toFixed(2).toString());
+    console.log(`1 USDT Price = ${priceInGentop} gentop`);
+  }
+  
+  useEffect(() => {
+    getPriceOfUSDTInGentop();
+  }, []);
   const callApprove = async () => {
     try {
-      const amountToApprove = String(data?.Plan || 0) === "0" ? "13400.0" : "1340.0";
+      
+      const amountToApprove = String(data?.Plan || 0) === "0" ? String(Number(priceOftotalGentops) * 10) || "1340.99" : priceOftotalGentops || "1340.99";
       console.log("Approving:", amountToApprove);
 
-      const tx = await approve([LuckyMeAddress, parseEther(amountToApprove)]);
+      const tx = await approve([LuckyMeAddress, parseEther(amountToApprove.toString())]);
       console.info("Approval successful", tx);
     } catch (err) {
       console.error("Approval failed", err);
@@ -251,7 +306,7 @@ export default function Renew({
 
   const callRenew = async () => {
     try {
-      const amount = String(data?.Plan || 0) === "0" ? "13400.0" : "1340.0";
+      const amount = String(data?.Plan || 0) === "0" ? "13400.99" : "1340.99";
 
       console.log("User Allowance:", formatEther(String(allowance || 0)));
       console.log("User Balance:", formatEther(String(balance || 0)));
@@ -311,7 +366,7 @@ export default function Renew({
                         Your balance: {formatEther(String(balance || 0))}
                       </div>
                       <div className="text-[14px] text-white">
-                        Your allowance: {formatEther(String(allowance || 0))}
+                        Your allowance:  {(entryFee/1e18 * Number(priceOftotalGentops)||13400.99).toFixed(2)} Gentops
                       </div>
                     </div>
                   </div>
@@ -320,7 +375,7 @@ export default function Renew({
                   {Number(formatEther(String(allowance || 0))) < Number("13400.0") && (
                     <button className="mb-3 block w-full rounded-lg bg-[#360712] px-3 py-2 text-[16px] text-white shadow-sm hover:opacity-60 border-2 border-white/40" onClick={callApprove}>
                       {approveIsLoading && <span className="animate-spin h-4 w-4 pr-2">⏳</span>}
-                      Approve 13400.0 Gentops
+                      Approve 13400.99 Gentops
                     </button>
                   )}
                   <button className="mt-3 block w-full rounded-lg px-3 py-2 text-[16px] text-white shadow-sm border-2 border-white/40 hover:opacity-60" onClick={callRenew}>
