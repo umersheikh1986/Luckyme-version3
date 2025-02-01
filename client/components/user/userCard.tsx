@@ -12,6 +12,7 @@ const UserCard = ({ userId, mode }: { userId: any; mode?: string }) => {
   const address = useAddress();
   const [open, setOpen] = useState(false);
   const [upgrade, setUpgrade] = useState(false);
+  const [ entryFee, setentryFee] = useState(0)
   const [totalRefrerrs, setTotalRefrerrs] = useState<Number>(0);
   const { contract } = useContract(LuckyMeAddress);
   const { data, isLoading } = useContractRead(
@@ -314,8 +315,8 @@ const UserCard = ({ userId, mode }: { userId: any; mode?: string }) => {
             </button>
           ) : null}
 
-          <Renew open={open} setOpen={setOpen} data={data} />
-          <Upgrade open={upgrade} setOpen={setUpgrade} data={data} />
+          <Renew open={open} setOpen={setOpen} data={data}  entryFee={entryFee} />
+          <Upgrade open={upgrade} setOpen={setUpgrade} data={data}  entryFee={entryFee} />
         </div>
       ) : null}
 
