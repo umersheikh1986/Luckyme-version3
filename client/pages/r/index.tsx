@@ -601,15 +601,23 @@ const UserRegisterThroughLink = ({ href }: { href?: string }) => {
   
   const handleOnChange = (e: any) => {
     const link = e.target.value;
+ if (link==String)
+  
+  {
     const regex = /\/r\/(\d+)/;
-    const match = link.match(regex);
-
+    const match = link.match(regex)
+ 
     if (match) {
-      setRefId(match[1]);
-      console.log("Extracted referral ID:", match[1]);
-    } else {
-      console.log("Invalid link format");
-    }
+
+  setRefId(match[1]);
+  console.log("Extracted referral ID:", match[1]);
+} else {
+  console.log("Invalid link format");
+}}
+else{
+    setRefId(link);
+}
+    
   };
 
   return (
@@ -621,7 +629,7 @@ const UserRegisterThroughLink = ({ href }: { href?: string }) => {
       {refId && <div className="mt-3 text-white text-center">Your Sponsor ID: {refId}</div>}
 
       <div className="mt-3 mb-4">
-        <label className="block text-lg text-white text-center">Enter Registration Link:</label>
+        <label className="block text-lg text-white text-center">Enter Referral Link Or Referral ID :</label>
         <input
           name="id"
           placeholder="Enter the link"
@@ -630,7 +638,7 @@ const UserRegisterThroughLink = ({ href }: { href?: string }) => {
         />
       </div>
 
-      {refId && (
+      {refId &&  (
         <>
           <div className="mt-1 mb-6">
             <label className="block text-lg text-white text-center">Select your Membership:</label>
