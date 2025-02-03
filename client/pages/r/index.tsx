@@ -457,7 +457,9 @@ import Link from "next/link";
 import { LuckyMeAddress, LuckyMeAbi, DaiAbi, DaiAddress } from "../../lib/contract";
 import { formatEther, parseEther } from "ethers/lib/utils";
 import { useRouter } from "next/router";
+import { classNames } from "../../lib/classNames";
 import { useState ,useEffect} from "react";
+import Image from "next/image";
 
 const GENTOPS_PER_USDT = 1340.4; // Conversion rate
 const AMOUNT_IN_GENTOPS = 1340; // Fixed registration amount
@@ -470,12 +472,14 @@ const UserRegisterThroughLink = ({ href }: { href?: string }) => {
   const [refId, setRefId] = useState<string | null>(null);
   const [selectedOption, setSelectedOption] = useState("13400.0");
   const [priceOftotalGentops,SetpriceOftotalGentops] = useState<string | null>(null)
+  const [isApproved, setIsApproved] = useState(false);
+
 
   const { contract: daiContract } = useContract(DaiAddress, DaiAbi);
   const { contract: LuckyMeContract } = useContract(LuckyMeAddress, LuckyMeAbi);
 
-  const { data: balance } = useContractRead(daiContract, "balanceOf", address);
-  const { data: allowance } = useContractRead(daiContract, "allowance", address, LuckyMeAddress);
+  const { data: balance , isLoading: balanceIsLoading } = useContractRead(daiContract, "balanceOf", address);
+  const { data: allowance , isLoading: allowanceIsLoading} = useContractRead(daiContract, "allowance", address, LuckyMeAddress);
 
   const { mutateAsync: approve, isLoading: approveIsLoading } = useContractWrite(daiContract, "approve");
   // const callApprove = async () => {
@@ -544,6 +548,7 @@ const UserRegisterThroughLink = ({ href }: { href?: string }) => {
       console.log(`Approving: ${amountToApprove.toString()} Gentops`);
   
       const data = await approve([LuckyMeAddress,parseEther(selectedOption)]);
+      setIsApproved(true);
       console.info("Approval success", data);
     } catch (err) {
       console.error("Approval failed", err);
@@ -585,7 +590,7 @@ const UserRegisterThroughLink = ({ href }: { href?: string }) => {
   
       console.log("Registering with:", refId, planType, address, amount.toString());
   
-      const data = await register([refId, selectedOption == "1.0" ? "0" : "1", address,amount, { gasLimit: 3000000 }]);
+      const data = await register([refId, selectedOption == "0" ? "1" : "0", address,amount, { gasLimit: 3000000 }]);
       console.info("Registration successful", data);
   
       if (href) router.push(href);
@@ -642,6 +647,7 @@ const UserRegisterThroughLink = ({ href }: { href?: string }) => {
 
           {Number(formatEther(String(allowance || 0))) < AMOUNT_IN_GENTOPS &&
             Number(formatEther(String(balance || 0))) >= AMOUNT_IN_GENTOPS && (
+              !isApproved && ( // Hide the button if approval is successful
               <button
                 className="mb-3 w-full rounded-lg bg-[#360712] px-3 py-3 text-white shadow-sm border-2 border-white/40 hover:opacity-60"
                 onClick={callApprove}
@@ -650,7 +656,7 @@ const UserRegisterThroughLink = ({ href }: { href?: string }) => {
                 {approveIsLoading ? "Approving..." : `Approve ${selectedOption} GENTOPS`}
 
               </button>
-            )}
+           ) )}
 
           {Number(formatEther(String(balance || 0))) >= AMOUNT_IN_GENTOPS ? (
             <button
@@ -662,6 +668,37 @@ const UserRegisterThroughLink = ({ href }: { href?: string }) => {
           ) : (
             <div className="text-center text-red-500">Insufficient balance for registration</div>
           )}
+           <div
+        className={classNames(
+          balanceIsLoading ? "animate-pulse" : "animate-none",
+          "pointer-events-auto mt-3 rounded-lg  p-4 text-[0.8125rem] leading-5 shadow-xl shadow-black/5 bg-[#360712] ring-1 ring-slate-700/10"
+        )}
+      >
+        <div className="flex justify-between text-[18px] text-white">
+          <span>Your Balance</span>
+          <span className="flex">
+            <Image className="w-[24px] mr-1"  width={500}
+      height={500} src="/assets/gLogo.png" alt="Gentop" />
+            <p>{formatEther(String(balance || 0))}</p>
+          </span>
+        </div>
+      </div>
+
+      <div
+        className={classNames(
+          allowanceIsLoading ? "animate-pulse" : "animate-none",
+          "pointer-events-auto mt-3 rounded-lg  p-4 text-[0.8125rem] leading-5 shadow-xl shadow-black/5 bg-[#360712] ring-1 ring-slate-700/10"
+        )}
+      >
+        <div className="flex justify-between text-[18px] text-white">
+          <span>Your Allowance</span>
+          <span className="flex">
+            <Image className="w-[24px] mr-1"  width={500}
+                height={500} src="/assets/gLogo.png" alt="Dai" />
+            <p>{formatEther(String(allowance || 0))}</p>
+          </span>
+        </div>
+      </div>
         </>
       )}
     </div>

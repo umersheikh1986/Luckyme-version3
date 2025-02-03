@@ -101,7 +101,7 @@ export default function Upgrade({
       const gentopMultiplier = priceOftotalGentops || "1340.99"; 
       console.log("Gentop Price after Conversion:", gentopMultiplier);
   
-      const entryFeeBN = entryFee || "0"; // Ensure entryFee is defined
+      const entryFeeBN =  "10"; // Ensure entryFee is defined
       console.log("Entry Fee:", entryFeeBN, entryFee);
   
       const approvalAmount = Number(entryFeeBN) * Number(gentopMultiplier);
@@ -112,7 +112,7 @@ export default function Upgrade({
   
       // Convert the fixed number to BigNumber format
       const amountToApprove = parseEther(approvalAmountStr);
-       console.log("This is amount Approved")
+       console.log("This is amount Approved",amountToApprove);
       const newData = await approve([LuckyMeAddress,amountToApprove]);
     } catch (err) {
       console.error("contract call failure", err);
@@ -192,7 +192,8 @@ export default function Upgrade({
                         Your balance {formatEther(String(balance || 0))}
                       </div>
                       <div className="text-[16px] text-white">
-                        Your allowance  {(entryFee/1e18 * Number(priceOftotalGentops)||13400.99).toFixed(2)} Gentops
+                         {/* Your allowance  {(10 * Number(priceOftotalGentops)||13400.99).toFixed(2)}  */}
+                          Your allownace {formatEther(String(allowance || 0))} Gentops 
                       </div>
                     </div>
                   </div>
