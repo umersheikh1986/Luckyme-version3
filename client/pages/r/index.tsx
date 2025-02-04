@@ -629,7 +629,7 @@ else{
       {refId && <div className="mt-3 text-white text-center">Your Sponsor ID: {refId}</div>}
 
       <div className="mt-3 mb-4">
-        <label className="block text-lg text-white text-center">Enter Referral Link Or Referral ID :</label>
+        <label className="block text-lg text-white text-center">Enter Referral Link Or eferral ID :</label>
         <input
           name="id"
           placeholder="Enter the link"

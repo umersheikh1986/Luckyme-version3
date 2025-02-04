@@ -82,7 +82,7 @@ const Auth = () => {
           {address && !isUserExists && (
             <span
               onClick={() => router.push(`/r`)}
-              className="inline-flex justify-center w-full rounded-lg  px-3 py-2 text-[16px] text-white shadow-sm border-2 border-white/40"
+              className="inline-flex justify-center cursor-pointer w-full rounded-lg  px-3 py-2 text-[16px] text-white shadow-sm border-2 border-white/40"
             >
               Become a Member
             </span>
