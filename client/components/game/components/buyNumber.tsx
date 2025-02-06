@@ -1013,7 +1013,7 @@ export default function BuyNumber({
       const gentopPrice = gentopData?.usdPrice;
     
       // Now calculate the ratio of 1 USDT in gentop
-      const priceInGentop = (usdtPrice / gentopPrice)*10;
+      const priceInGentop = (usdtPrice / gentopPrice);
       SetpriceOftotalGentops(priceInGentop.toString());
       console.log(`1 USDT Price = ${priceInGentop} gentop`);
     }
