@@ -101,7 +101,7 @@ function TotalRewardsPaid() {
         </div>
       </div>
 
-      <div className="pointer-events-auto h-full bg-[#360712] border-2 border-white/40 rounded-lg p-4 text-[0.8125rem] leading-5 shadow-xl shadow-black/5 ring-1 ring-slate-700/10">
+      {/* <div className="pointer-events-auto h-full bg-[#360712] border-2 border-white/40 rounded-lg p-4 text-[0.8125rem] leading-5 shadow-xl shadow-black/5 ring-1 ring-slate-700/10">
         <div className="text-lg text-white text-center">PRIZES REWARDS</div>
         <div className="mt-3 text-lg text-white text-center">
           {Number(formatEther(String(data?.PrizesRef || 0))).toLocaleString(
@@ -109,7 +109,7 @@ function TotalRewardsPaid() {
           )}{" "}
           GENTOP
         </div>
-      </div>
+      </div> */}
 
       <div className="pointer-events-auto h-full bg-[#360712] border-2 border-white/40 rounded-lg p-4 text-[0.8125rem] leading-5 shadow-xl shadow-black/5 ring-1 ring-slate-700/10">
         <div className="text-lg text-white  text-center">

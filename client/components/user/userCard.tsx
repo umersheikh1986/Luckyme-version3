@@ -46,16 +46,17 @@ const UserCard = ({ userId, mode }: { userId: any; mode?: string }) => {
 
   const userReferrals = () => {
     var total = 0;
-
+    var total1 = 0;
     for (let i = 0; i < 5; i++) {
       const element1 = userTotalRefrerrs.memberLevels[i];
       const element2 = userTotalRefrerrs.partnersLevels[i];
 
-      total += Number(String(element1 || 0));
+      total1 += Number(String(element1 || 0));
       total += Number(String(element2 || 0));
     }
 
     setTotalRefrerrs(total);
+    setTotalRefrerrs(total1/2.5)
   };
 
   useEffect(() => {
@@ -170,7 +171,7 @@ const UserCard = ({ userId, mode }: { userId: any; mode?: string }) => {
           {String(data?.Plan || 0) === "0" ? "Standard" : "Premium"}
         </div>
 
-        <div className="mt-1 font-medium text-center text-white text-lg">
+        {/* <div className="mt-1 font-medium text-center text-white text-lg">
           Total Earnings :{" "}
           {Number(formatEther(String(totalEarning || 0))).toLocaleString(
             "en-US"
@@ -182,7 +183,7 @@ const UserCard = ({ userId, mode }: { userId: any; mode?: string }) => {
             src="/assets/gLogo.png"
             alt="Dai"
           />
-        </div>
+        </div> */}
 
         {!isLoading ? (
           <div className="mt-1 font-medium text-center text-white text-lg">

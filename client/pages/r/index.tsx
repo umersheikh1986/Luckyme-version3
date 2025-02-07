@@ -470,7 +470,7 @@ const UserRegisterThroughLink = ({ href }: { href?: string }) => {
   const address = useAddress();
   
   const [refId, setRefId] = useState<string | null>(null);
-  const [selectedOption, setSelectedOption] = useState("13400.0");
+  const [selectedOption, setSelectedOption] = useState("26800.0");
   const [priceOftotalGentops,SetpriceOftotalGentops] = useState<string | null>(null)
   const [isApproved, setIsApproved] = useState(false);
 
@@ -534,7 +534,7 @@ const UserRegisterThroughLink = ({ href }: { href?: string }) => {
     const gentopPrice = gentopData?.usdPrice;
   
     // Now calculate the ratio of 1 USDT in gentop
-    const priceInGentop = (usdtPrice / gentopPrice)*10;
+    const priceInGentop = (usdtPrice / gentopPrice)*20;
     SetpriceOftotalGentops(priceInGentop.toFixed(2).toString());
     console.log(`1 USDT Price = ${priceInGentop} gentop`);
   }
@@ -548,7 +548,7 @@ const UserRegisterThroughLink = ({ href }: { href?: string }) => {
       console.log(`Approving: ${amountToApprove.toString()} Gentops`);
   
       const data = await approve([LuckyMeAddress,parseEther(selectedOption)]);
-      setIsApproved(true);
+      // setIsApproved(true);
       console.info("Approval success", data);
     } catch (err) {
       console.error("Approval failed", err);
@@ -585,12 +585,12 @@ const UserRegisterThroughLink = ({ href }: { href?: string }) => {
     }
   
     try {
-      const planType = selectedOption === "0" ? 1 : 0; // Adjust plan type dynamically
+      const planType = selectedOption === "0" ? "1" : 0; // Adjust plan type dynamically
       const amount = parseEther(selectedOption.toString()); // Use selectedOption
   
       console.log("Registering with:", refId, planType, address, amount.toString());
   
-      const data = await register([refId, selectedOption == "0" ? "1" : "0", address,amount, { gasLimit: 3000000 }]);
+      const data = await register([refId, selectedOption == "26800" ? "1" : "0", address,amount, { gasLimit: 3000000 }]);
       console.info("Registration successful", data);
   
       if (href) router.push(href);
@@ -601,8 +601,7 @@ const UserRegisterThroughLink = ({ href }: { href?: string }) => {
   
   const handleOnChange = (e: any) => {
     const link = e.target.value;
- if (link==String)
-  
+ if (link===String)
   {
     const regex = /\/r\/(\d+)/;
     const match = link.match(regex)
@@ -611,8 +610,6 @@ const UserRegisterThroughLink = ({ href }: { href?: string }) => {
 
   setRefId(match[1]);
   console.log("Extracted referral ID:", match[1]);
-} else {
-  console.log("Invalid link format");
 }}
 else{
     setRefId(link);
@@ -647,7 +644,7 @@ else{
               className="mt-1 block w-full rounded-md py-1.5 text-gray-900 shadow-sm ring-1 ring-gray-300 focus:ring-2 focus:ring-blue-600"
             >
               {/* <option value={"68240.0"}>Premium 20 USDT</option> */}
-              <option value={priceOftotalGentops?.toString()|| "13400.0"}>Premium 10 USDT</option>
+              <option value={priceOftotalGentops?.toString()|| "26800"}>Premium 10 USDT</option>
 
               <option value={"0.0"}>Standard 1 USDT</option>
             </select>
@@ -655,7 +652,7 @@ else{
 
           {Number(formatEther(String(allowance || 0))) < AMOUNT_IN_GENTOPS &&
             Number(formatEther(String(balance || 0))) >= AMOUNT_IN_GENTOPS && (
-              !isApproved && ( // Hide the button if approval is successful
+              // !isApproved && ( // Hide the button if approval is successful
               <button
                 className="mb-3 w-full rounded-lg bg-[#360712] px-3 py-3 text-white shadow-sm border-2 border-white/40 hover:opacity-60"
                 onClick={callApprove}
@@ -664,7 +661,7 @@ else{
                 {approveIsLoading ? "Approving..." : `Approve ${selectedOption} GENTOPS`}
 
               </button>
-           ) )}
+            )}
 
           {Number(formatEther(String(balance || 0))) >= AMOUNT_IN_GENTOPS ? (
             <button

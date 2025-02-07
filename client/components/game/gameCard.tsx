@@ -18,7 +18,7 @@ const GameCard = ({
   Id: number;
   userId: string;
   mode?: string;
-  tAmount: string;
+  tAmount: number;
 }) => {
   const [open, setOpen] = useState(false);
   const { contract } = useContract(LuckyMeAddress);
