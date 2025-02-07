@@ -236,7 +236,7 @@ const UserCard = ({ userId, mode }: { userId: any; mode?: string }) => {
           </span>
         </div>
 
-        <div className="flex mt-2 justify-between font-medium text-white">
+        {/* <div className="flex mt-2 justify-between font-medium text-white">
           <span className="mr-2 text-lg">Prizes Rewards</span>
           <span className="flex">
             <Image
@@ -252,7 +252,7 @@ const UserCard = ({ userId, mode }: { userId: any; mode?: string }) => {
               ).toLocaleString("en-US")}
             </p>
           </span>
-        </div>
+        </div> */}
 
         <div className="flex mt-2 justify-between font-medium text-white">
           <span className="mr-2 text-lg">Membership Rewards</span>
