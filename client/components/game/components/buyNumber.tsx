@@ -954,7 +954,8 @@ export default function BuyNumber({
   // Contracts
   const { contract: daiContract } = useContract(DaiAddress, DaiAbi);
   const { contract: LuckyMeContract } = useContract(LuckyMeAddress);
-   const [priceOftotalGentops,SetpriceOftotalGentops] = useState("1340.99")
+  const [priceOftotalGentops,SetpriceOftotalGentops] = useState("1340.99")
+  const [isApproved, setIsApproved] = useState(false);
 
   // Read functions
   const { data: balance } = useContractRead(daiContract, "balanceOf", address);
@@ -1042,7 +1043,10 @@ export default function BuyNumber({
         const amountToApprove = parseEther(approvalAmountStr);
          console.log("This is amount Approved")
         const data = await approve([LuckyMeAddress,amountToApprove]);
+        setIsApproved(true);
         console.log("Contract approval successful", data);
+      
+        
       } catch (err) {
         console.error("Contract approval failure", err);
       }
@@ -1158,15 +1162,18 @@ export default function BuyNumber({
                       {
                       // BigNumber.from(allowance || "0").lt(BigNumber.from(entryFee).mul(String(priceOftotalGentops))) &&
                       //   BigNumber.from(balance || "0").gte(BigNumber.from(entryFee)) && (
+
+                     !isApproved && ( // Hide the button if approval is successful
+                       
                           <button
                             className="mb-3 block w-full rounded-lg bg-[#360712] px-3 py-2 text-[16px] text-white shadow-sm hover:opacity-60 border-2 border-white/40"
                             onClick={callApprove}
                             disabled={approveIsLoading}
                           >
-                            {approveIsLoading ? "Approving..." : `Approve ${(entryFee/1e18 * Number(priceOftotalGentops)||1340).toFixed(2)} Gentops`}
+                            {approveIsLoading ? "Approving..." : `Approve ${(entryFee/1e18 * Number(priceOftotalGentops)||1340.99).toFixed(2)} Gentops`}
                           </button>
-                        // )
-                        }
+                      
+                          ) }
 
                       {BigNumber.from(balance || "0").gte(BigNumber.from(entryFee)) ? (
                         <button

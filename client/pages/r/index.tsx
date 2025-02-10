@@ -470,7 +470,7 @@ const UserRegisterThroughLink = ({ href }: { href?: string }) => {
   const address = useAddress();
   
   const [refId, setRefId] = useState<string | null>(null);
-  const [selectedOption, setSelectedOption] = useState("26800.0");
+  const [selectedOption, setSelectedOption] = useState("26800.18");
   const [priceOftotalGentops,SetpriceOftotalGentops] = useState<string | null>(null)
   const [isApproved, setIsApproved] = useState(false);
 
@@ -590,7 +590,7 @@ const UserRegisterThroughLink = ({ href }: { href?: string }) => {
   
       console.log("Registering with:", refId, planType, address, amount.toString());
   
-      const data = await register([refId, selectedOption == "26800" ? "1" : "0", address,amount, { gasLimit: 3000000 }]);
+      const data = await register([refId, selectedOption == "26800.18" ||priceOftotalGentops?.toString() ? "1" : "0", address,amount, { gasLimit: 3000000 }]);
       console.info("Registration successful", data);
   
       if (href) router.push(href);
@@ -644,7 +644,7 @@ else{
               className="mt-1 block w-full rounded-md py-1.5 text-gray-900 shadow-sm ring-1 ring-gray-300 focus:ring-2 focus:ring-blue-600"
             >
               {/* <option value={"68240.0"}>Premium 20 USDT</option> */}
-              <option value={priceOftotalGentops?.toString()|| "26800"}>Premium 10 USDT</option>
+              <option value={priceOftotalGentops?.toString()|| "26800"}>Premium 20 USDT</option>
 
               <option value={"0.0"}>Standard 1 USDT</option>
             </select>
